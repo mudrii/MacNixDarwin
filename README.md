@@ -115,7 +115,7 @@ vim flake.nix
 ## build and install
 
 ```nix
-nix --extra-experimental-features "nix-command flakes" build .#darwinConfigurations.MacBook-Pro-64.system
+nix --extra-experimental-features "nix-command flakes" build .#darwinConfigurations.macbook.system
 
 ./result/sw/bin/darwin-rebuild switch --flake ~/src/system-config
 

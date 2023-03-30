@@ -28,6 +28,8 @@
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [
+      powerline-fonts
+#      nerdfonts
       (nerdfonts.override { fonts = [ "Meslo" ]; })
     ];
   };

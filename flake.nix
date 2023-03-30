@@ -33,6 +33,10 @@
                 ./modules/home-manager/dotfiles/nvim.nix
                 ./modules/home-manager/dotfiles/alacritty.nix
                 ./modules/home-manager/dotfiles/tmux.nix
+                ./modules/home-manager/dotfiles/tmux.nix
+                ./modules/home-manager/dotfiles/kitty.nix
+                ./modules/home-manager/dotfiles/lf.nix
+                ./modules/home-manager/dotfiles/ssh.nix
               ];
             };
           }

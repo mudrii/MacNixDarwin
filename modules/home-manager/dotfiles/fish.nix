@@ -31,9 +31,9 @@
       src = pkgs.fetchFromGitHub {
         owner = "oh-my-fish";
         repo = "theme-bobthefish";
-        rev = "626bd39b002535d69e56adba5b58a1060cfb6d7b";
+        rev = "76cac812064fa749ffc258a20398c6f6250860c5";
         # sha256 = lib.fakeSha256;
-        sha256 = "zUngqEZgHLmlyvoiVO3MwJTSFsYD7t3XiP6yMzmMkBs=";
+        sha256 = "7nZ25R75WsSPqSmyeJbRQ49cITxL3D5CfyplsixFlY8=";
       };
     }];
     loginShellInit = ''

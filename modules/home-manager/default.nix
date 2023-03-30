@@ -6,6 +6,8 @@
       PAGER = "less";
       CLICLOLOR = 1;
       EDITOR = "nvim";
+      # MANPAGER = "nvim -c 'set ft=man' -";
+      TERM = "xterm-256color";
     };
     packages = with pkgs; [
       ripgrep
@@ -13,6 +15,19 @@
       curl
       less
       exa
+      highlight
+      lf
+      (
+        python39.withPackages (
+          ps: with ps; [
+            #poetry
+            pip
+            powerline
+            pygments
+            xstatic-pygments
+          ]
+        )
+      )
     ];
   };
   programs = {
@@ -37,14 +52,9 @@
       enableFishIntegration = true;
     };
 
-    starship = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-#    alacritty = {
+#    starship = {
 #      enable = true;
-#      settings.font.normal.family = "MesloLGS Nerd Font Mono";
-#      settings.font.size = 16;
+#      enableZshIntegration = true;
 #    };
   };
 #  home.file.".inputrc".source = ./dotfiles/inputrc;

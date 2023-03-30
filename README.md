@@ -3,7 +3,7 @@
 ## Install nix on Mac
 
 ```bash
-sh <(curl -L https://nixos.org/nix/install)
+sh <(curl -L https://nixos.org/nix/install) --daemon
 ```
 
 ## Test installed nix
@@ -119,16 +119,6 @@ nix --extra-experimental-features "nix-command flakes" build .#darwinConfigurati
 
 ./result/sw/bin/darwin-rebuild switch --flake ~/src/system-config
 
-printf 'run\tprivate/var/run\n' | sudo tee -a /etc/synthetic.conf
-
-/System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t
-
-./result/sw/bin/darwin-rebuild switch --flake ~/src/system-config
-```
-
-## Fixing a few issues
-
-```nix
 printf 'run\tprivate/var/run\n' | sudo tee -a /etc/synthetic.conf
 
 /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t

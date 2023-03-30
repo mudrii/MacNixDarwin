@@ -2,7 +2,7 @@
   home = {
     stateVersion = "22.11";
     sessionVariables = {
-      # SHELL = "fish";
+      SHELL = "fish";
       PAGER = "less";
       CLICLOLOR = 1;
       EDITOR = "nvim";
@@ -17,12 +17,14 @@
       exa
       highlight
       lf
+      direnv
+#      powerline
       (
         python39.withPackages (
           ps: with ps; [
             #poetry
             pip
-            powerline
+ #           powerline
             pygments
             xstatic-pygments
           ]

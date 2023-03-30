@@ -32,7 +32,7 @@
         lt = "exa --long --all --group --header --tree --level ";
         lless = "set -gx LESSOPEN '|pygmentize -f terminal256 -g -P style=monokai %s' && set -gx LESS '-R' && less -m -g -i -J -u -Q";
         nixsw = "darwin-rebuild switch --flake ~/src/system-config/.#";
-        nixup = "pushd ~/src/system-config; nix flake update; nixswitch; popd";
+        nixup = "pushd ~/src/system-config; nix flake update; nixsw; popd";
         # ucl = "nix-collect-garbage -d && nix-store --gc && nix-store --repair --verify --check-contents && nix-store --optimise -vvv";
         # scl = "sudo nix-collect-garbage -d && sudo nix-store --gc && sudo nix-store --repair --verify --check-contents && sudo nix-store --optimise -vvv";
         # acl = "ucl && scl";

@@ -10,7 +10,8 @@
     baseIndex = 1;
     shell = "${pkgs.fish}/bin/fish";
     extraConfig = ''
-      source ${pkgs.python39Packages.powerline}/share/tmux/powerline.conf
+#      source ${pkgs.python39Packages.powerline}/share/tmux/powerline.conf
+      source ${pkgs.powerline}/share/tmux/powerline.conf      
 
       setw -g xterm-keys on
       set -sg repeat-time 600

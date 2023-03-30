@@ -13,7 +13,7 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs@{ nixpkgs, home-manager, darwin, ... }: {
-    darwinConfigurations.MacBook-Pro-64 =
+    darwinConfigurations.mudrii14 =
       darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         pkgs = import nixpkgs { system = "aarch64-darwin"; };

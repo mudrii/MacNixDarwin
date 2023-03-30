@@ -1,4 +1,4 @@
-{ pkgs, ... }: 
+{ pkgs, ... }:
 
 {
   services.nix-daemon.enable = true;
@@ -6,7 +6,7 @@
   programs.zsh.enable = true;
   programs.fish.enable = true;
   environment = {
-    shells = with pkgs; [ 
+    shells = with pkgs; [
       bash
       zsh
       fish
@@ -33,11 +33,11 @@
       (nerdfonts.override { fonts = [ "Meslo" ]; })
     ];
   };
-  
+
   system.defaults = {
     dock.autohide = true;
 
-    finder = { 
+    finder = {
       AppleShowAllFiles = true;
       _FXShowPosixPathInTitle = true;
     };
@@ -56,7 +56,7 @@
     caskArgs.no_quarantine = true;
     global.brewfile = true;
     masApps = { };
-    #casks = [ "raycast" "amethyst" ];
+    casks = [ "raycast" "amethyst" ];
     taps = [ "fujiapple852/trippy" ];
     brews = [ "trippy" ];
   };

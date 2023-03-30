@@ -1,36 +1,52 @@
-{ pkgs, ... }: {
-  programs.zsh.enable = true;
+{ pkgs, ... }: 
+
+{
+  services.nix-daemon.enable = true;
+
+  # programs.zsh.enable = true;
   environment = {
     shells = with pkgs; [ 
       bash
       zsh
       fish
     ];
-    loginShell = pkgs.zsh;
+    loginShell = pkgs.fish;
     systemPackages = [ pkgs.coreutils ];
     systemPath = [ "/opt/homebrew/bin" ];
     pathsToLink = [ "/Applications" ];
   };
+
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-  system.keyboard.enableKeyMapping = true;
-  system.keyboard.remapCapsLockToEscape = true;
-  fonts.fontDir.enable = true; # DANGER
-  fonts.fonts =
-    [ (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; }) ];
-  services.nix-daemon.enable = true;
+  system.keyboard = {
+    enableKeyMapping = true;
+    remapCapsLockToEscape = true;
+  };
+
+  fonts = {
+    fontDir.enable = true;
+    fonts = with pkgs; [
+      (nerdfonts.override { fonts = [ "Meslo" ]; })
+    ];
+  };
+  
   system.defaults = {
-    finder.AppleShowAllExtensions = true;
-    finder._FXShowPosixPathInTitle = true;
     dock.autohide = true;
+
+    finder = { 
+      AppleShowAllFiles = true;
+      _FXShowPosixPathInTitle = true;
+    };
+
     NSGlobalDomain = {
       AppleShowAllExtensions = true;
       InitialKeyRepeat = 14;
       KeyRepeat = 1;
     };
+
   };
-  # backwards compat; don't change
+  # backwards compatibility; don't change
   system.stateVersion = 4;
 	  homebrew = {
     enable = true;

@@ -18,14 +18,14 @@
         system = "aarch64-darwin";
         pkgs = import nixpkgs { system = "aarch64-darwin"; };
         modules = [
-          ./modules/darwin 
+          ./modules/darwin
           home-manager.darwinModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               users.mudrii.imports = [
-	              ./modules/home-manager
+                ./modules/home-manager
                 ./modules/home-manager/dotfiles/bash.nix
                 ./modules/home-manager/dotfiles/zsh.nix
                 ./modules/home-manager/dotfiles/fish.nix

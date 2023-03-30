@@ -17,7 +17,6 @@
       exa
       highlight
       lf
-      direnv
 #      powerline
       (
         python39.withPackages (
@@ -54,10 +53,12 @@
       enableFishIntegration = true;
     };
 
-#    starship = {
-#      enable = true;
-#      enableZshIntegration = true;
-#    };
+    direnv = {
+      enable = true;
+      nix-direnv = {
+        enable = true;
+      };
+    };
   };
 #  home.file.".inputrc".source = ./dotfiles/inputrc;
 }

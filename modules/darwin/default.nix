@@ -3,14 +3,15 @@
 {
   services.nix-daemon.enable = true;
 
-  # programs.zsh.enable = true;
+  programs.zsh.enable = true;
+  programs.fish.enable = true;
   environment = {
     shells = with pkgs; [ 
       bash
       zsh
       fish
     ];
-    loginShell = pkgs.fish;
+    loginShell = pkgs.zsh;
     systemPackages = [ pkgs.coreutils ];
     systemPath = [ "/opt/homebrew/bin" ];
     pathsToLink = [ "/Applications" ];

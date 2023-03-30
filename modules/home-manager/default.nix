@@ -2,7 +2,7 @@
   home = {
     stateVersion = "22.11";
     sessionVariables = {
-      SHELL = "fish";
+      # SHELL = "fish";
       PAGER = "less";
       CLICLOLOR = 1;
       EDITOR = "nvim";
@@ -12,6 +12,7 @@
       fd
       curl
       less
+      exa
     ];
   };
   programs = {
@@ -40,11 +41,11 @@
       enable = true;
       enableZshIntegration = true;
     };
-    alacritty = {
-      enable = true;
-      settings.font.normal.family = "MesloLGS Nerd Font Mono";
-      settings.font.size = 16;
-    };
+#    alacritty = {
+#      enable = true;
+#      settings.font.normal.family = "MesloLGS Nerd Font Mono";
+#      settings.font.size = 16;
+#    };
   };
 #  home.file.".inputrc".source = ./dotfiles/inputrc;
 }

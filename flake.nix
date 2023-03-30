@@ -27,12 +27,12 @@
               users.mudrii.imports = [
 	              ./modules/home-manager
                 ./modules/home-manager/dotfiles/bash.nix
-              #  ./modules/home-manager/dotfiles/zsh.nix
-              #  ./modules/home-manager/dotfiles/fish.nix
-              #  ./modules/home-manager/dotfiles/git.nix
-              #  ./modules/home-manager/dotfiles/nvim.nix
-              #  ./modules/home-manager/dotfiles/alacritty.nix
-              #  ./modules/home-manager/dotfiles/tmux.nix
+                ./modules/home-manager/dotfiles/zsh.nix
+                ./modules/home-manager/dotfiles/fish.nix
+                ./modules/home-manager/dotfiles/git.nix
+                ./modules/home-manager/dotfiles/nvim.nix
+                ./modules/home-manager/dotfiles/alacritty.nix
+                ./modules/home-manager/dotfiles/tmux.nix
               ];
             };
           }

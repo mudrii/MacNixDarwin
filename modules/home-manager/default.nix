@@ -17,6 +17,7 @@
       exa
       highlight
       lf
+      gh
 #      powerline
       (
         python39.withPackages (

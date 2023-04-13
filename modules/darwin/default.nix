@@ -1,10 +1,13 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   services.nix-daemon.enable = true;
 
-  programs.zsh.enable = true;
-  programs.fish.enable = true;
+  programs = {
+    zsh.enable = true;
+    fish.enable = true;
+  };
+
   environment = {
     shells = with pkgs; [
       bash
@@ -43,7 +46,7 @@
     };
 
     NSGlobalDomain = {
-      AppleShowAllExtensions = true;
+      AppleShowAllExtensions = false;
       InitialKeyRepeat = 14;
       KeyRepeat = 1;
     };

@@ -12,10 +12,8 @@ end
 function fish_user_key_bindings
   bind '$?' bind_status
   bind '$$' bind_self
-end
-
-function sudobangbang --on-event fish_postexec
-    abbr !! sudo $argv[1]
+  bind `!` bind_bang
+  bind '$' bind_dollar
 end
 
 function bind_bang
@@ -37,7 +35,3 @@ function bind_dollar
   end
 end
 
-function fish_user_key_bindings
-  bind ! bind_bang
-  bind '$' bind_dollar
-end

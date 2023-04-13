@@ -1,11 +1,16 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+
+{
   home = {
     stateVersion = "22.11";
     sessionVariables = {
-      SHELL = "fish";
-      PAGER = "less";
-      CLICLOLOR = 1;
+      LANG = "en_US.UTF-8";
+      LC_CTYPE = "en_US.UTF-8";
+      LC_ALL = "en_US.UTF-8";
       EDITOR = "nvim";
+      PAGER = "less -FirSwX";
+      SHELL = "fish";
+      CLICLOLOR = 1;
       # MANPAGER = "nvim -c 'set ft=man' -";
       TERM = "xterm-256color";
     };
@@ -18,13 +23,14 @@
       highlight
       lf
       gh
+      bitwarden-cli
 #      powerline
       (
         python39.withPackages (
           ps: with ps; [
-            #poetry
+            poetry-core
             pip
- #           powerline
+            #powerline
             pygments
             xstatic-pygments
           ]
@@ -32,13 +38,19 @@
       )
     ];
   };
+
   programs = {
     jq.enable = true;
     command-not-found.enable = true;
     exa.enable = true;
-    dircolors.enable = true;
     htop.enable = true;
     info.enable = true;
+
+    dircolors = {
+      enable = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+    };
 
     bat = {
       enable = true;

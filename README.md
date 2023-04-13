@@ -134,8 +134,23 @@ sudo rm /etc/nix/nix.conf /etc/shells
 ./result/sw/bin/darwin-rebuild switch --flake ~/src/system-config
 ```
 
+## change default shell
+
+```sh
+chsh -s /run/current-system/sw/bin/fish
+```
+
 ## Rebuild on configurations changes
 
 ```nix
 darwin-rebuild switch --flake ~/src/system-config/.#
+```
+
+### Optional
+
+#### link
+```shell
+sudo ln -s /Users/mudrii/Applications/JetBrains\ Toolbox/  JetBrains\ Apps
+sudo ln -s /Users/mudrii/Applications/Home\ Manager\ Apps/  Home\ Manager\ Apps                                                  3697ms
+sudo ln -s /Users/mudrii/Applications Users\ Apps
 ```

@@ -61,6 +61,10 @@
     masApps = { };
     casks = [ "raycast" "amethyst" ];
     taps = [ "fujiapple852/trippy" ];
-    brews = [ "trippy" ];
+    brews = [
+      "trippy"
+      "podman"
+      "sha2"
+    ];
   };
 }

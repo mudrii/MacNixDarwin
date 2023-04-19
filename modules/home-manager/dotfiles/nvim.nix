@@ -168,7 +168,7 @@
       set showcmd
       set visualbell
       set noerrorbells
-      set printoptions=paper:letter
+      "set printoptions=paper:A4,duplex:off,collate:n,syntax:n
       set spelllang=en_us
       set cursorline
       

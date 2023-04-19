@@ -24,13 +24,20 @@
       lf
       gh
       bitwarden-cli
+      awscli2
+      nodejs
+      pv
+      ffmpeg
+      openai
+      openai-whisper
 #      powerline
       (
         python39.withPackages (
           ps: with ps; [
             poetry-core
             pip
-            #powerline
+            boto3
+#            powerline
             pygments
             xstatic-pygments
           ]

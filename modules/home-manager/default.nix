@@ -38,6 +38,7 @@
             pip
             boto3
 #            powerline
+            torch-bin
             pygments
             xstatic-pygments
           ]

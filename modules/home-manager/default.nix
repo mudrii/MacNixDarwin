@@ -1,6 +1,19 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./dotfiles/bash.nix
+    ./dotfiles/zsh.nix
+    ./dotfiles/fish.nix
+    ./dotfiles/git.nix
+    ./dotfiles/nvim.nix
+    ./dotfiles/alacritty.nix
+    ./dotfiles/tmux.nix
+    ./dotfiles/kitty.nix
+    ./dotfiles/lf.nix
+    ./dotfiles/ssh.nix
+  ];
+
   home = {
     stateVersion = "22.11";
     sessionVariables = {

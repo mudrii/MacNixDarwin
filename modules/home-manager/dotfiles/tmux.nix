@@ -13,8 +13,8 @@
 #      plugins = with pkgs [
 #     ]
       extraConfig = ''
-#        source ${pkgs.python39Packages.powerline}/share/tmux/powerline.conf
-       source ${pkgs.powerline}/share/tmux/powerline.conf
+#        source ${pkgs.python310Packages.powerline}/share/tmux/powerline.conf
+#        source ${pkgs.powerline}/share/tmux/powerline.conf
 
         # Lower delay
         set -s escape-time 1
@@ -34,7 +34,6 @@
         # monitor activity in windows
         setw -g monitor-activity on
 
-#        setw -g xterm-keys on
         set -sg repeat-time 600
         set -s focus-events on
 
@@ -55,11 +54,8 @@
 
         # Silence bell
         set-option -g visual-bell on
-
-#        set -g visual-bell on
-#        set -g bell-action any
-
-#        setw -g monitor-activity on
+        set -g bell-action any
+        setw -g monitor-activity on
         set -g visual-activity on
 
         # Change window-splitting commands
@@ -84,18 +80,8 @@
         bind K resize-pane -U 2
         bind L resize-pane -R 2
 
-#        bind -r h select-pane -L  # move left
-#        bind -r j select-pane -D  # move down
-#        bind -r k select-pane -U  # move up
-#        bind -r l select-pane -R  # move right
-
         bind > swap-pane -D       # swap current pane with the next one
         bind < swap-pane -U       # swap current pane with the previous one
-
-#        bind -r H resize-pane -L 2
-#        bind -r J resize-pane -D 2
-#        bind -r K resize-pane -U 2
-#        bind -r L resize-pane -R 2
       '';
     };
 }

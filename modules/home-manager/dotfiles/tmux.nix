@@ -7,11 +7,19 @@
       terminal = "xterm-256color";
       historyLimit = 406000; # Up the history limit
       prefix = "C-a";
-      baseIndex = 0; # Index windows from 0
+      baseIndex = 1; # Index windows from 1
       mouse = true;
       shell = "${pkgs.fish}/bin/fish";
-#      plugins = with pkgs [
-#     ]
+      plugins = with pkgs; [
+        tmuxPlugins.better-mouse-mode
+        tmuxPlugins.resurrect
+        tmuxPlugins.yank
+        tmuxPlugins.nord
+        tmuxPlugins.resurrect
+        tmuxPlugins.open
+        tmuxPlugins.sidebar
+        tmuxPlugins.continuum
+      ];
       extraConfig = ''
 #        source ${pkgs.python310Packages.powerline}/share/tmux/powerline.conf
 #        source ${pkgs.powerline}/share/tmux/powerline.conf

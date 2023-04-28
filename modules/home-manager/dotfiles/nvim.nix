@@ -36,10 +36,11 @@
       vimPlugins.vim-snippets
       vimPlugins.vim-commentary
       vimPlugins.undotree
+      vimPlugins.vim-tmux-navigator
     ];
     extraConfig = ''
       "set shell=sh
-    
+
       let g:airline_powerline_fonts = 1
       if !exists('g:airline_symbols')
         let g:airline_symbols = {}
@@ -94,7 +95,6 @@
       set t_Co=256
       
       " General Config
-      set exrc " open .vimrc from current folder
       set exrc " open .vimrc from current folder
       set guicursor= " set cursor as block
       set nowrap " do not wrap the test

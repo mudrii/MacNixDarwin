@@ -19,6 +19,7 @@
         tmuxPlugins.open
         tmuxPlugins.sidebar
         tmuxPlugins.continuum
+        tmuxPlugins.vim-tmux-navigator
       ];
       extraConfig = ''
 #        source ${pkgs.python310Packages.powerline}/share/tmux/powerline.conf

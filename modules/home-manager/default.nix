@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   imports = [
@@ -14,6 +14,11 @@
     ./dotfiles/ssh.nix
   ];
 
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowBroken = true;
+  };
+
   home = {
     stateVersion = "22.11";
     sessionVariables = {
@@ -27,6 +32,7 @@
       # MANPAGER = "nvim -c 'set ft=man' -";
       TERM = "xterm-256color";
     };
+
     packages = with pkgs; [
       ripgrep
       fd
@@ -53,7 +59,8 @@
 #            openai-whisper
             boto3
 #            powerline
-            torch-bin
+#            torch-bin
+            torch
             pygments
             xstatic-pygments
           ]

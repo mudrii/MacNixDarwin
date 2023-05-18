@@ -16,7 +16,6 @@
     darwinConfigurations.mudrii16 =
       darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        pkgs = import nixpkgs { system = "aarch64-darwin"; };
         modules = [
           ./modules/darwin
           home-manager.darwinModules.home-manager
@@ -34,7 +33,6 @@
     darwinConfigurations.mudrii14 =
       darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        pkgs = import nixpkgs { system = "aarch64-darwin"; };
         modules = [
           ./modules/darwin
           home-manager.darwinModules.home-manager

@@ -47,8 +47,6 @@
       nodejs
       pv
       ffmpeg
-#      openai
-      openai-whisper
 #      powerline
       (
         python310.withPackages (
@@ -56,7 +54,9 @@
             poetry-core
             pip
             openai
-#            openai-whisper
+            langchain
+            pandas
+            openai-whisper
             boto3
 #            powerline
 #            torch-bin

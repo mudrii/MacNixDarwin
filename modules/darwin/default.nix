@@ -3,6 +3,15 @@
 {
   services.nix-daemon.enable = true;
 
+  users = {
+    users = {
+      mudrii = {
+        shell = pkgs.fish;
+        home = "/Users/mudrii";
+      };
+    };
+  };
+
   programs = {
     zsh.enable = true;
     fish.enable = true;

@@ -57,6 +57,9 @@
             langchain
             pandas
             openai-whisper
+            tiktoken
+            ipython
+            jupyter
             boto3
 #            powerline
 #            torch-bin

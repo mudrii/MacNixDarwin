@@ -69,7 +69,7 @@
 
         # Change window-splitting commands
         unbind %
-        bind | split-window -h
+        bind = split-window -h
         bind - split-window -v
 
         bind C-f command-prompt -p find-session 'switch-client -t %%'

@@ -1,7 +1,6 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
-#  home-manager.users.mudrii = {
     programs.lf = {
       enable = true;
       extraConfig = ''

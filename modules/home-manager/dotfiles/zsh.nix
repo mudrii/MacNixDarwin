@@ -5,7 +5,7 @@
     enable = true;
     enableCompletion = true;
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
     shellAliases = {
       ccat = "pygmentize -f terminal256 -g -P style=monokai";
       gadc = "git add -A; and git commit";

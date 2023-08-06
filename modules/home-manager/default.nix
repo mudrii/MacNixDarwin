@@ -47,6 +47,7 @@
       nodejs
       pv
       ffmpeg
+      universal-ctags
 #      powerline
       (
         python310.withPackages (

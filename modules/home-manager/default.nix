@@ -50,15 +50,15 @@
             poetry-core
             pip
             openai
-            langchain
+#            langchain
             pandas
             openai-whisper
             tiktoken
             ipython
             jupyter
             boto3
-#            powerline
-#            torch-bin
+##            powerline
+##            torch-bin
             torch
             pygments
             xstatic-pygments

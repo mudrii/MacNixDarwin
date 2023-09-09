@@ -2,7 +2,7 @@
   description = "Ion flake";
   inputs = {
     # called derivations that say how to build software.
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; # nixos-22.11
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; # nixos-23.11
 
     # Manages configs links things into your home directory
     home-manager.url = "github:nix-community/home-manager/master";

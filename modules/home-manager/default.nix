@@ -15,7 +15,7 @@
   ];
 
   home = {
-    stateVersion = "22.11";
+    stateVersion = "23.11";
     sessionVariables = {
       LANG = "en_US.UTF-8";
       LC_CTYPE = "en_US.UTF-8";
@@ -33,7 +33,6 @@
       fd
       curl
       less
-      #eza
       highlight
       lf
       gh
@@ -50,9 +49,10 @@
             poetry-core
             pip
             openai
+            openai-whisper
+#            tensorflow
 #            langchain
             pandas
-            openai-whisper
             tiktoken
             ipython
             jupyter
@@ -60,6 +60,7 @@
 ##            powerline
 ##            torch-bin
             torch
+            numpy
             pygments
             xstatic-pygments
           ]

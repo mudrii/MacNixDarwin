@@ -33,7 +33,7 @@
       fd
       curl
       less
-      exa
+      #eza
       highlight
       lf
       gh
@@ -71,7 +71,7 @@
   programs = {
     jq.enable = true;
     command-not-found.enable = true;
-    exa.enable = true;
+    eza.enable = true;
     htop.enable = true;
     info.enable = true;
 

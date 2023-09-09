@@ -15,9 +15,9 @@
       gpl = "git pull";
       gps = "git push";
       gst = "git status";
-      la = "exa --long --all --group --header --group-directories-first --sort=type --icons";
-      lg = "exa --long --all --group --header --git";
-      lt = "exa --long --all --group --header --tree --level ";
+      la = "eza --long --all --group --header --group-directories-first --sort=type --icons";
+      lg = "eza --long --all --group --header --git";
+      lt = "eza --long --all --group --header --tree --level ";
       lless = "set -gx LESSOPEN '|pygmentize -f terminal256 -g -P style=monokai %s' && set -gx LESS '-R' && less -m -g -i -J -u -Q";
       vdir = "vdir --color=auto";
       nixsw = "darwin-rebuild switch --flake ~/src/system-config/.#";

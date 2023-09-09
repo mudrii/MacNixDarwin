@@ -71,9 +71,10 @@
     };
 
   };
+
   # backwards compatibility; don't change
   system.stateVersion = 4;
-	  homebrew = {
+	homebrew = {
     enable = true;
     caskArgs.no_quarantine = true;
     global.brewfile = true;

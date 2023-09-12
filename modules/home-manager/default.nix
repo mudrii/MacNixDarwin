@@ -39,6 +39,7 @@
       bitwarden-cli
       awscli2
       nodejs
+      bun
       pv
       ffmpeg
       universal-ctags
@@ -50,7 +51,7 @@
             pip
             openai
             openai-whisper
-#            tensorflow
+            tensorflow
 #            langchain
             pandas
             tiktoken

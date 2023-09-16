@@ -43,6 +43,7 @@
       pv
       ffmpeg
       universal-ctags
+      open-interpreter
 #      powerline
       (
         python310.withPackages (

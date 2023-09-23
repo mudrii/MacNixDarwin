@@ -4,40 +4,46 @@
   programs.neovim = {
     enable = true;
     vimAlias = true;
-    plugins = with pkgs; [
-      vimPlugins.vim-nix
-      vimPlugins.vim-fish
-      vimPlugins.vim-airline
-      vimPlugins.vim-airline-themes
-      vimPlugins.vim-devicons
-      vimPlugins.vim-gitgutter
-      vimPlugins.ctrlp-vim
-      vimPlugins.vim-fugitive
-      vimPlugins.fzf-vim
-      vimPlugins.syntastic
-      vimPlugins.coc-python
-      vimPlugins.coc-nvim
-      vimPlugins.coc-yaml
-      vimPlugins.coc-json
-      vimPlugins.coc-html
-      vimPlugins.coc-lists
-      vimPlugins.coc-eslint
-      vimPlugins.coc-tsserver
-      vimPlugins.coc-snippets
-      vimPlugins.coc-pairs
-      vimPlugins.coc-prettier
-      vimPlugins.coc-markdownlint
-      vimPlugins.nerdtree
-      vimPlugins.nerdcommenter
-      vimPlugins.nerdtree-git-plugin
-      vimPlugins.vim-nerdtree-syntax-highlight
-      # vimPlugins.vim-closer
-      # vimPlugins.vim-endwise
-      vimPlugins.vim-snippets
-      vimPlugins.vim-commentary
-      vimPlugins.undotree
-      vimPlugins.vim-tmux-navigator
+    defaultEditor = true;
+    plugins = with pkgs.vimPlugins; [
+      vim-nix
+      vim-fish
+      vim-airline
+      vim-airline-themes
+      vim-devicons
+      vim-gitgutter
+      ctrlp-vim
+      vim-fugitive
+      fzf-vim
+      syntastic
+      coc-python
+      coc-nvim
+      coc-yaml
+      coc-json
+      coc-html
+      coc-lists
+      coc-eslint
+      coc-tsserver
+      coc-snippets
+      coc-pairs
+      coc-prettier
+      coc-markdownlint
+      nerdtree
+      nerdcommenter
+      nerdtree-git-plugin
+      vim-nerdtree-syntax-highlight
+      #vim-closer
+      #vim-endwise
+      vim-snippets
+      vim-commentary
+      undotree
+      vim-tmux-navigator
     ];
+
+    extraLuaConfig = ''
+
+      '';
+
     extraConfig = ''
       "set shell=sh
 

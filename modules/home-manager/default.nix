@@ -36,6 +36,7 @@
       highlight
       lf
       gh
+      tree
       bitwarden-cli
       awscli2
       nodejs

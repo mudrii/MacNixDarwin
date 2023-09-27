@@ -41,6 +41,7 @@
       awscli2
       nodejs
       bun
+      lua
       pv
       ffmpeg
       universal-ctags
@@ -97,6 +98,10 @@
       enable = true;
       enableZshIntegration = true;
       enableFishIntegration = true;
+    };
+
+    atuin = {
+      enable = true;
     };
 
     direnv = {

@@ -37,6 +37,7 @@
       lf
       gh
       tree
+      nix-tree
       bitwarden-cli
       awscli2
       nodejs

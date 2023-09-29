@@ -55,8 +55,7 @@
             pip
             openai
             openai-whisper
-#            tensorflow
-#            langchain
+            langchain
             pandas
             tiktoken
             ipython

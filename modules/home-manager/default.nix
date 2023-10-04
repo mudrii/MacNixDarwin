@@ -37,6 +37,7 @@
       lf
       gh
       tree
+      parallel
       nix-tree
       bitwarden-cli
       awscli2

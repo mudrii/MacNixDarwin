@@ -27,6 +27,7 @@
       nvim-treesitter-parsers.typescript
       nvim-treesitter-parsers.yaml
       nvim-treesitter-parsers.zig
+      nvim-treesitter-parsers.ocaml
 
     ];
 
@@ -68,7 +69,7 @@
 
       vim.opt.nu = true
       vim.opt.relativenumber = true
-
+ 
       vim.opt.tabstop = 4
       vim.opt.softtabstop = 4
       vim.opt.shiftwidth = 4

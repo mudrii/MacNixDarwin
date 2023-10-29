@@ -56,7 +56,8 @@
             pip
             openai
             openai-whisper
-            langchain
+#            langchain
+            autogen
             pandas
             tiktoken
             ipython

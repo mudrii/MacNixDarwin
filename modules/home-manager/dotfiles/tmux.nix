@@ -91,6 +91,9 @@
 
         bind > swap-pane -D       # swap current pane with the next one
         bind < swap-pane -U       # swap current pane with the previous one
+
+        # Allow Ctrl+a beggingin of the line
+        bind a send-prefix
       '';
     };
 }

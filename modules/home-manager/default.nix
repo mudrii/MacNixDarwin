@@ -50,7 +50,7 @@
       open-interpreter
 #      powerline
       (
-        python310.withPackages (
+        python3.withPackages (
           ps: with ps; [
             poetry-core
             pip

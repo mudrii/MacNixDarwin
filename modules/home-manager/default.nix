@@ -48,10 +48,13 @@
       ffmpeg
       universal-ctags
       open-interpreter
+#      ollama
 #      powerline
       (
         python3.withPackages (
           ps: with ps; [
+            transformers
+#            accelerate
             poetry-core
             pip
             openai

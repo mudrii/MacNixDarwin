@@ -48,6 +48,8 @@
       ffmpeg
       universal-ctags
       open-interpreter
+      openai
+      openai-whisper
 #      ollama
 #      powerline
       (
@@ -57,8 +59,8 @@
 #            accelerate
             poetry-core
             pip
-            openai
-            openai-whisper
+#            openai
+#            openai-whisper
 #            langchain
             autogen
             pandas

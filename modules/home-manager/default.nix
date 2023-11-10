@@ -47,6 +47,7 @@
       pv
       ffmpeg
       universal-ctags
+#      github-copilot-cli
       open-interpreter
       openai
       openai-whisper
@@ -69,8 +70,8 @@
             jupyter
             boto3
 ##            powerline
-##            torch-bin
-            torch
+            torch-bin
+#            torch
             numpy
             pygments
             xstatic-pygments

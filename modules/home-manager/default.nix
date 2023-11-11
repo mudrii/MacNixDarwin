@@ -29,6 +29,7 @@
     };
 
     packages = with pkgs; [
+      nushell
       ripgrep
       fd
       curl

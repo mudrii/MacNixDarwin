@@ -53,6 +53,7 @@
       openai-whisper
 #      ollama
 #      powerline
+      poetry
       (
         python3.withPackages (
           ps: with ps; [

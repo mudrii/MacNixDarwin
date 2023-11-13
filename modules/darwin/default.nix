@@ -32,6 +32,7 @@
   nixpkgs.config = {
     allowUnfree = true;
     allowBroken = true;
+#    allowUnsupportedSystem = true;
 #    permittedInsecurePackages = [
 #      "python3.10-tensorflow-2.11.1"
 #      "tensorflow-2.11.1"

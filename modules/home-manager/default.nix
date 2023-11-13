@@ -49,20 +49,20 @@
       ffmpeg
       universal-ctags
 #      github-copilot-cli
-      open-interpreter
-      openai
-      openai-whisper
+#      open-interpreter
+#      openai
+#      openai-whisper
 #      ollama
 #      powerline
       poetry
       (
         python3.withPackages (
           ps: with ps; [
-            transformers
+#            transformers
 #            accelerate
             poetry-core
             pip
-#            openai
+            openai
 #            openai-whisper
 #            langchain
             autogen

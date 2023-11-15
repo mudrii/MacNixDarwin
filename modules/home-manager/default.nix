@@ -50,7 +50,7 @@
       universal-ctags
 #      github-copilot-cli
 #      open-interpreter
-#      openai
+      openai
 #      openai-whisper
 #      ollama
 #      powerline
@@ -62,7 +62,7 @@
 #            accelerate
             poetry-core
             pip
-            openai
+#            openai
 #            openai-whisper
 #            langchain
             autogen

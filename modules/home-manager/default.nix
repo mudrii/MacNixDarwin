@@ -63,6 +63,8 @@
 #            accelerate
             poetry-core
             pip
+            pipx
+            huggingface-hub
             openai
 #            openai-triton
 #            openai-whisper

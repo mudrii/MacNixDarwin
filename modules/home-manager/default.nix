@@ -50,7 +50,8 @@
       universal-ctags
 #      github-copilot-cli
 #      open-interpreter
-      openai
+#      openai
+      openai-whisper-cpp
 #      openai-whisper
 #      ollama
 #      powerline
@@ -58,22 +59,23 @@
       (
         python3.withPackages (
           ps: with ps; [
-#            transformers
+#            powerline
 #            accelerate
             poetry-core
             pip
-#            openai
+            openai
+#            openai-triton
 #            openai-whisper
-#            langchain
+            langchain
             autogen
             pandas
             tiktoken
             ipython
             jupyter
             boto3
-##            powerline
-            torch-bin
-#            torch
+#            torch-bin
+            transformers
+            torch
             numpy
             pygments
             xstatic-pygments

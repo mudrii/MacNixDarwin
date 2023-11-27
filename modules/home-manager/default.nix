@@ -29,6 +29,7 @@
     };
 
     packages = with pkgs; [
+      nix-tree
       nushell
       ripgrep
       fd

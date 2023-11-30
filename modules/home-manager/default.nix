@@ -79,6 +79,8 @@
 #            torch-bin
             transformers
             torch
+            torchvision
+            torchaudio
             numpy
             pygments
             xstatic-pygments

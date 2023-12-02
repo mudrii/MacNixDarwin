@@ -30,6 +30,8 @@
 
     packages = with pkgs; [
       nix-tree
+      git-lfs
+      wget
       nushell
       ripgrep
       fd

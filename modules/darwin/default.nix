@@ -80,7 +80,7 @@
     caskArgs.no_quarantine = true;
     global.brewfile = true;
     masApps = { };
-    casks = [ "raycast" "amethyst" "rsyncui" ];
+    casks = [ "raycast" "amethyst" "rsyncui" "insomnia" ];
     taps = [ "fujiapple852/trippy" ];
     brews = [
       "trippy"

@@ -75,17 +75,13 @@
 
   # backwards compatibility; don't change
   system.stateVersion = 4;
-	homebrew = {
+  homebrew = {
     enable = true;
     caskArgs.no_quarantine = true;
     global.brewfile = true;
     masApps = { };
-    casks = [ "raycast" "amethyst" "rsyncui" "insomnia" "google-drive" ];
+    casks = [ "raycast" "amethyst" "rsyncui" "insomnia" "podman-desktop" "google-drive" ];
     taps = [ "fujiapple852/trippy" ];
-    brews = [
-      "trippy"
-      "podman"
-      "sha2"
-    ];
+    brews = [ "trippy" "podman" "sha2"];
   };
 }

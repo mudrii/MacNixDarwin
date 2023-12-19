@@ -1,16 +1,15 @@
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, ... }: {
   programs.neovim = {
     enable = true;
     vimAlias = true;
     defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
       telescope-nvim
-      harpoon
+      harpoon2
       undotree
-      # copilot.lua
-      copilot-vim
+      tmux-nvim
+      copilot-lua
+      # copilot-vim
       vim-fugitive
       nvim-treesitter
       nvim-treesitter-parsers.dockerfile
@@ -51,15 +50,15 @@
         }
 
       -- Harpoom configuration
-      -- local mark = require("harpoon.mark")
-      local ui = require("harpoon.ui")
-      vim.keymap.set("n", "<leader>a", mark.add_file)
-      vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
+      local harpoon = require("harpoon")
+      harpoon:setup()
+      vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
+      vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
-      vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
-      vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
-      vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
-      vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
+      vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+      vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
+      vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+      vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
 
       -- Undotree configration
       vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
@@ -72,7 +71,7 @@
       vim.opt.nu = true
       vim.opt.relativenumber = true
  
-      vim.opt.tabstop = 4
+      vim.opt.tabstop = 2
       vim.opt.softtabstop = 4
       vim.opt.shiftwidth = 4
       vim.opt.expandtab = true

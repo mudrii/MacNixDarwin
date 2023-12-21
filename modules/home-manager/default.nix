@@ -63,7 +63,7 @@
         python3.withPackages (
           ps: with ps; [
 #            powerline
-#            accelerate
+            accelerate
             poetry-core
             pip
             pipx

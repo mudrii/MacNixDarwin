@@ -7,7 +7,7 @@
       telescope-nvim
       harpoon2
       undotree
-      tmux-nvim
+      # tmux-nvim
       copilot-lua
       # copilot-vim
       vim-fugitive

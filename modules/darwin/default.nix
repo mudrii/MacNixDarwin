@@ -78,10 +78,29 @@
   homebrew = {
     enable = true;
     caskArgs.no_quarantine = true;
-    global.brewfile = true;
     masApps = { };
-    casks = [ "raycast" "amethyst" "rsyncui" "insomnia" "podman-desktop" "google-drive" ];
+    global = {
+      brewfile = true;
+      autoUpdate = false;
+    };
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+#      extraFlags = [ "--verbose" ];
+    };
+    casks = [ 
+      "raycast" 
+      "amethyst" 
+      "rsyncui" 
+      "insomnia" 
+      "podman-desktop" 
+      "google-drive" 
+    ];
+    brews = [ 
+      "trippy" 
+      "podman" 
+      "sha2"
+    ];
     taps = [ "fujiapple852/trippy" ];
-    brews = [ "trippy" "podman" "sha2"];
   };
 }

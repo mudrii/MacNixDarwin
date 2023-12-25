@@ -60,9 +60,16 @@
     extraLuaConfig = ''
       vim.g.mapleader = " "  -- Set the global leader key to the space bar. The leader key is used in combination with other keys for custom key mappings.
       vim.g.maplocalleader = ' '  -- Set the local leader key to the space bar. The local leader can be used for buffer-local key mappings.
-
+ 
       -- Lualine
       require('lualine').setup()  -- Initialize Lualine with default settings.
+    
+      -- CMP configuration
+      local cmp = require('cmp')
+      local luasnip = require('luasnip')
+
+      -- LSP configuration
+        
 
       -- Colorscheme configuration
       require('rose-pine').setup({
@@ -86,7 +93,7 @@
       -- Toggleterm configuration
       require("toggleterm").setup{ -- Initialize Toggleterm with default settings.
   	    size = 20,
-       	open_mapping = [[<c-\>]],
+       	open_mapping = [[<C-\>]],
        	hide_numbers = true,
        	shade_filetypes = {},
        	shade_terminals = true,
@@ -124,10 +131,6 @@
       vim.keymap.set('n', '<leader>fr', builtin.live_grep, {})  -- Map <leader>fr to Telescope live_grep function.
       vim.keymap.set('n', '<leader>fg', builtin.git_files, {})  -- Map <leader>fg to Telescope git_files function.
       vim.keymap.set('n', '<leader>fb', builtin.buffers, {})  -- Map <leader>fb to Telescope buffers function.
-      vim.keymap.set('n', '<leader>lsd', builtin.lsp_definitions{})  -- Map <leader>lsd to Telescope lsp_definitions function.
-      vim.keymap.set('n', '<leader>lsi', builtin.lsp_implementations{}) -- Map <leader>lsi to Telescope lsp_implementations function.
-      vim.keymap.set('n', '<leader>lsl', builtin.lsp_code_actions{}) -- Map <leader>lsl to Telescope lsp_code_actions function.
-      vim.keymap.set('n', '<leader>lst', builtin.lsp_type_definitions{}) -- Map <leader>lst to Telescope lsp_type_definitions function.
 
       -- Treesitter configuration
       require'nvim-treesitter.configs'.setup {  -- Initialize Treesitter with a configuration table.
@@ -140,12 +143,12 @@
       -- Harpoon configuration
       local harpoon = require("harpoon")  -- Load the Harpoon module.
       harpoon:setup()  -- Initialize Harpoon with default settings.
-      vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)  -- Map <leader>a to append the current file to Harpoon list.
+      vim.keymap.set("n", "<leader>ha", function() harpoon:list():append() end)  -- Map <leader>ha to append the current file to Harpoon list.
       vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)  -- Map <C-e> to toggle Harpoon quick menu.
-      vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)  -- Map <C-h> to select the first item in Harpoon list.
-      vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)  -- Map <C-t> to select the second item in Harpoon list.
-      vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)  -- Map <C-n> to select the third item in Harpoon list.
-      vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)  -- Map <C-s> to select the fourth item in Harpoon list.
+      vim.keymap.set("n", "<C-1>", function() harpoon:list():select(1) end)  -- Map <C-1> to select the first item in Harpoon list.
+      vim.keymap.set("n", "<C-2>", function() harpoon:list():select(2) end)  -- Map <C-2> to select the second item in Harpoon list.
+      vim.keymap.set("n", "<C-3>", function() harpoon:list():select(3) end)  -- Map <C-3> to select the third item in Harpoon list.
+      vim.keymap.set("n", "<C-4>", function() harpoon:list():select(4) end)  -- Map <C-4> to select the fourth item in Harpoon list.
       
       vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end) -- Map <C-S-P> to select the previous item in Harpoon list.
       vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end) -- Map <C-S-N> to select the next item in Harpoon list.
@@ -187,7 +190,6 @@
       vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }) -- Make the current file executable.
 
       -- General configuration options
-      
       vim.opt.termguicolors = true -- Enable 24-bit RGB color support.
 
       vim.opt.guicursor = "" -- Set the cursor to a vertical bar.
@@ -195,17 +197,20 @@
       vim.opt.nu = true -- Show line numbers.
       vim.opt.relativenumber = true -- Show relative line numbers.
  
-      vim.opt.tabstop = 4 -- Set the tabstop to 2 spaces.
-      vim.opt.softtabstop = 4 -- Set the softtabstop to 2 spaces.
-      vim.opt.shiftwidth = 4 -- Set the shiftwidth to 2 spaces.
+      -- vim.opt.tabstop = 4 -- Set the tabstop to 2 spaces.
+      -- vim.opt.softtabstop = 4 -- Set the softtabstop to 2 spaces.
+      -- vim.opt.shiftwidth = 4 -- Set the shiftwidth to 2 spaces.
       vim.opt.expandtab = true -- Use spaces instead of tabs.
+      vim.opt.smarttab = true -- Enable smart tabs.
+      vim.opt.cpoptions = 'I' -- Make tab insert indents instead of tabs.
 
-      vim.opt.smartindent = true -- Enable smart indentation.
-      vim.opt.smartcase = true  -- Enable smart case.
-      vim.opt.autoread = true -- 
+      -- vim.opt.smartindent = true -- Enable smart indentation.
+      vim.opt.breakindent = true -- Enable break indent.
+      
+      vim.opt.autoread = true -- Automatically reload files when they are changed outside of Neovim.
 
       vim.opt.mouse = "a" -- Enable mouse support.  
-      vim.o.clipboard = 'unnamedplus' -- Use the system clipboard.
+      vim.opt.clipboard = 'unnamedplus' -- Use the system clipboard.
 
       vim.opt.wrap = false -- Disable line wrapping.
 
@@ -217,6 +222,9 @@
       vim.opt.hlsearch = false -- Disable search highlighting.
       vim.opt.incsearch = true -- Enable incremental search.
 
+      vim.opt.smartcase = true  -- Enable smart case.
+      vim.opt.ignorecase = true -- Ignore case when searching.`
+
       vim.opt.termguicolors = true -- Enable 24-bit RGB color support.
 
       vim.opt.scrolloff = 8 -- Set the scrolloff to 8 lines.
@@ -226,7 +234,7 @@
       vim.opt.updatetime = 500 -- Set the updatetime to 500ms.
 
       -- vim.opt.colorcolumn = "80" -- Set the colorcolumn to 80 characters.
-      -- <F7><F7><F7><F7><F7><F7><F7><F7><F7><F7><F7>derw<F6><F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5><F5><F5><F5>vim. cmd ("colorscheme gruvbox") -- Set the color scheme to gruvbox.
+      -- vim.cmd ("colorscheme gruvbox") -- Set the color scheme to gruvbox.
       '';
   };
 }

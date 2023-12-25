@@ -5,11 +5,13 @@
     defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
       telescope-nvim
+      vim-airline
+      vim-airline-themes
       harpoon2
       undotree
       # tmux-nvim
-      copilot-lua
-      # copilot-vim
+      # copilot-lua
+      copilot-vim
       vim-fugitive
       nvim-treesitter
       nvim-treesitter-parsers.dockerfile
@@ -33,8 +35,12 @@
     ];
 
     extraLuaConfig = ''
-      vim.g.mapleader = " "
+      vim.g.mapleader = " "  -- Set the global leader key to the space bar. The leader key is used in combination with other keys for custom key mappings.
+      vim.g.maplocalleader = ' '  -- Set the local leader key to the space bar. The local leader can be used for buffer-local key mappings.
 
+      -- Key remappings
+      vim.keymap.set("n", "<leader>pv", vim.cmd.Ex) -- Open the command line window
+      
       -- Telescope configuration      
       local builtin = require('telescope.builtin')
       vim.keymap.set('n', '<leader>ff', builtin.find_files, {})

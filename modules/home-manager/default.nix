@@ -48,6 +48,8 @@
       nodejs
       bun
       lua
+      lua-language-server
+      rnix-lsp
       pv
       ffmpeg
       universal-ctags

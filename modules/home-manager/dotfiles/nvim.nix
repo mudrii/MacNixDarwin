@@ -1,28 +1,27 @@
 { config, pkgs, ... }: {
   programs.neovim = {
     enable = true;
+    viAlias = true;
     vimAlias = true;
+    vimdiffAlias = true;
     defaultEditor = true;
     plugins = with pkgs.vimPlugins; [
       telescope-nvim # Telescope is a highly extendable fuzzy finder over lists.
       comment-nvim # Comment out lines of code based on the file type.
       nvim-ts-context-commentstring # Set the commentstring based on the cursor location in the file.
       nvim-web-devicons # Show file icons in Nvim.
-      gruvbox # A retro groove color scheme for Vim.
+      gruvbox-nvim # A retro groove color scheme for Neovim.
       tokyonight-nvim # A dark color scheme for Neovim.
       onedark-nvim # A dark color scheme for Neovim.
       lualine-nvim # A light and configurable statusline/tabline plugin for Neovim written in Lua.
+      toggleterm-nvim # A plugin for toggling terminals in Neovim.
       harpoon2 # A navigation utility plugin for Neovim.
       undotree # A plugin for visualizing undo history.
-      # tmux-nvim # A plugin for controlling Tmux from Nvim.
-      # copilot-lua # A plugin for generating code with GitHub Copilot.
       copilot-vim # A plugin for generating code with GitHub Copilot.
       rose-pine # A color scheme for Neovim.
       lsp-colors-nvim # A plugin for highlighting LSP diagnostics.
-      lsp-zero-nvim # A plugin for configuring LSP in Neovim.
       nvim-lspconfig # A collection of configurations for Neovim's built-in LSP client.
-      mason-lspconfig-nvim # A plugin for configuring LSP in Neovim.
-      mason-nvim # A plugin for configuring Neovim.
+      neodev-nvim # A plugin for configuring Neovim.
       nvim-cmp # A completion plugin for Neovim.  
       cmp-buffer # A buffer source for nvim-cmp.
       cmp-path # A path source for nvim-cmp.
@@ -32,25 +31,30 @@
       luasnip # A snippet engine for Neovim.
       friendly-snippets # A collection of snippets for LuaSnip.
       vim-fugitive # A Git wrapper for Neovim.
-      nvim-treesitter # A parser generator tool and an incremental parsing library.
-      nvim-treesitter-parsers.dockerfile # A parser for Dockerfiles.
-      nvim-treesitter-parsers.c # A parser for C.
-      nvim-treesitter-parsers.lua # A parser for Lua.
-      nvim-treesitter-parsers.rust # A parser for Rust.
-      nvim-treesitter-parsers.fish # A parser for Fish.
-      nvim-treesitter-parsers.go # A parser for Go.
-      nvim-treesitter-parsers.json # A parser for JSON.
-      nvim-treesitter-parsers.nix # A parser for Nix.
-      nvim-treesitter-parsers.markdown # A parser for Markdown.
-      nvim-treesitter-parsers.python # A parser for Python.
-      nvim-treesitter-parsers.sql # A parser for SQL.
-      nvim-treesitter-parsers.terraform # A parser for Terraform.
-      nvim-treesitter-parsers.javascript # A parser for JavaScript.
-      nvim-treesitter-parsers.typescript # A parser for TypeScript.
-      nvim-treesitter-parsers.yaml # A parser for YAML.
-      nvim-treesitter-parsers.zig # A parser for Zig.
-      nvim-treesitter-parsers.ocaml # A parser for OCaml.
-      nvim-treesitter-parsers.java # A parser for Java.
+      {
+        plugin = (nvim-treesitter.withPlugins (p: [
+          p.tree-sitter-nix 
+          p.tree-sitter-vim
+          p.tree-sitter-bash
+          p.tree-sitter-lua
+          p.tree-sitter-python
+          p.tree-sitter-c
+          p.tree-sitter-rust
+          p.tree-sitter-c
+          p.tree-sitter-json
+          p.tree-sitter-go
+          p.tree-sitter-typescript
+          p.tree-sitter-javascript
+          p.tree-sitter-yaml
+          p.tree-sitter-zig
+          p.tree-sitter-ocaml
+          p.tree-sitter-java
+          p.tree-sitter-fish
+          p.tree-sitter-terraform
+          p.tree-sitter-markdown
+          p.tree-sitter-sql
+        ]));
+      }
     ];
 
     extraLuaConfig = ''
@@ -72,67 +76,47 @@
       	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
       end
 
-      ColorMyPencils()
-
-      -- LSP configuration
-      local lsp = require("lsp-zero") -- Load the LSP Zero module.
-      lsp.preset("recommended") -- Load the recommended LSP settings.
-      
-      local cmp = require('cmp') -- Load the nvim-cmp module.
-      local cmp_select = {behavior = cmp.SelectBehavior.Select} -- Create a variable to store the cmp.SelectBehavior.Select behavior.
-      local cmp_mappings = lsp.defaults.cmp_mappings({
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        ["<C-Space>"] = cmp.mapping.complete(),
-      })
-
-      cmp_mappings['<Tab>'] = nil
-      cmp_mappings['<S-Tab>'] = nil
-
-      lsp.set_preferences({
-          suggest_lsp_servers = false,
-          sign_icons = {
-              error = 'E',
-              warn = 'W',
-              hint = 'H',
-              info = 'I'
-          }
-      })
+      ColorMyPencils() 
       
       -- Comment configuration
-      local status_ok, comment = pcall(require, "Comment")
-      if not status_ok then
-        return
+      require('Comment').setup() -- Initialize Comment with default settings.
+
+      vim.g.skip_ts_context_commentstring_module = true
+      
+      -- Toggleterm configuration
+      require("toggleterm").setup{ -- Initialize Toggleterm with default settings.
+  	    size = 20,
+       	open_mapping = [[<c-\>]],
+       	hide_numbers = true,
+       	shade_filetypes = {},
+       	shade_terminals = true,
+       	shading_factor = 2,
+       	start_in_insert = true,
+       	insert_mappings = true,
+       	persist_size = true,
+       	direction = "float",
+       	close_on_exit = true,
+       	shell = vim.o.shell,
+       	float_opts = {
+       		border = "curved",
+       		winblend = 0,
+       		highlights = {
+      	    border = "Normal",
+     	  	  background = "Normal",
+       		},
+       	},
+      }
+      function _G.set_terminal_keymaps()
+        local opts = {noremap = true}
+        vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+        vim.api.nvim_buf_set_keymap(0, 't', 'jk', [[<C-\><C-n>]], opts)
+        vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
+        vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+        vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+        vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
       end
 
-      comment.setup {
-        pre_hook = function(ctx)
-          local U = require "Comment.utils"
-
-          local status_utils_ok, utils = pcall(require, "ts_context_commentstring.utils")
-          if not status_utils_ok then
-            return
-          end
-
-          local location = nil
-          if ctx.ctype == U.ctype.block then
-            location = utils.get_cursor_location()
-          elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
-            location = utils.get_visual_start_location()
-          end
-
-          local status_internals_ok, internals = pcall(require, "ts_context_commentstring.internals")
-          if not status_internals_ok then
-            return
-          end
-
-          return internals.calculate_commentstring {
-            key = ctx.ctype == U.ctype.line and "__default" or "__multiline",
-            location = location,
-          }
-        end,
-      }
+      vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
       -- Telescope configuration      
       local builtin = require('telescope.builtin')  -- Load the Telescope built-in functions.
@@ -140,12 +124,17 @@
       vim.keymap.set('n', '<leader>fr', builtin.live_grep, {})  -- Map <leader>fr to Telescope live_grep function.
       vim.keymap.set('n', '<leader>fg', builtin.git_files, {})  -- Map <leader>fg to Telescope git_files function.
       vim.keymap.set('n', '<leader>fb', builtin.buffers, {})  -- Map <leader>fb to Telescope buffers function.
+      vim.keymap.set('n', '<leader>lsd', builtin.lsp_definitions{})  -- Map <leader>lsd to Telescope lsp_definitions function.
+      vim.keymap.set('n', '<leader>lsi', builtin.lsp_implementations{}) -- Map <leader>lsi to Telescope lsp_implementations function.
+      vim.keymap.set('n', '<leader>lsl', builtin.lsp_code_actions{}) -- Map <leader>lsl to Telescope lsp_code_actions function.
+      vim.keymap.set('n', '<leader>lst', builtin.lsp_type_definitions{}) -- Map <leader>lst to Telescope lsp_type_definitions function.
 
       -- Treesitter configuration
       require'nvim-treesitter.configs'.setup {  -- Initialize Treesitter with a configuration table.
-        highlight = {
-          enable = true,  -- Enable Treesitter-based syntax highlighting.
-        },
+        ensure_installed = {}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+        auto_install = false, -- if true, automatically install parsers for all languages
+        highlight = { enable = true }, -- false will disable the whole extension
+        indent = { enable = true }, -- false will disable the whole extension
       }
 
       -- Harpoon configuration
@@ -206,12 +195,17 @@
       vim.opt.nu = true -- Show line numbers.
       vim.opt.relativenumber = true -- Show relative line numbers.
  
-      vim.opt.tabstop = 2 -- Set the tabstop to 2 spaces.
-      vim.opt.softtabstop = 2 -- Set the softtabstop to 2 spaces.
-      vim.opt.shiftwidth = 2 -- Set the shiftwidth to 2 spaces.
+      vim.opt.tabstop = 4 -- Set the tabstop to 2 spaces.
+      vim.opt.softtabstop = 4 -- Set the softtabstop to 2 spaces.
+      vim.opt.shiftwidth = 4 -- Set the shiftwidth to 2 spaces.
       vim.opt.expandtab = true -- Use spaces instead of tabs.
 
       vim.opt.smartindent = true -- Enable smart indentation.
+      vim.opt.smartcase = true  -- Enable smart case.
+      vim.opt.autoread = true -- 
+
+      vim.opt.mouse = "a" -- Enable mouse support.  
+      vim.o.clipboard = 'unnamedplus' -- Use the system clipboard.
 
       vim.opt.wrap = false -- Disable line wrapping.
 
@@ -232,6 +226,7 @@
       vim.opt.updatetime = 500 -- Set the updatetime to 500ms.
 
       -- vim.opt.colorcolumn = "80" -- Set the colorcolumn to 80 characters.
+      -- <F7><F7><F7><F7><F7><F7><F7><F7><F7><F7><F7>derw<F6><F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5>7<F5><F5><F5><F5>vim. cmd ("colorscheme gruvbox") -- Set the color scheme to gruvbox.
       '';
   };
 }

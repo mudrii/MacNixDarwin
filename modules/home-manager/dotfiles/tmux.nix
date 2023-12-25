@@ -3,7 +3,7 @@
 {
     programs.tmux = {
       enable = true;
-      #keyMode = "vi";
+      keyMode = "vi";
       terminal = "xterm-256color";
       historyLimit = 406000; # Up the history limit
       prefix = "C-a";

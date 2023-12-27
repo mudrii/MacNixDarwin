@@ -127,7 +127,7 @@
       allow_hyperlinks yes
       term xterm-256color
       macos_titlebar_color system
-      macos_option_as_alt no
+      macos_option_as_alt left
       macos_hide_from_tasks no
       macos_quit_when_last_window_closed no
       macos_window_resizable yes

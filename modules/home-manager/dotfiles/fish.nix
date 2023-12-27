@@ -199,13 +199,13 @@
 #        body = "commandline -i (echo '$status')";
 #      };
 #      bind_self = {
-#        body = "commandline -i (echo '%self')";
+#        body = "commandline -i (echo '$fish_pid')";
 #      };
 #      fish_user_key_bindings = {
 #        body = "
 #          bind '$?' bind_status
 #          bind '$$' bind_self
-#          bind ! bind_bang
+#          # bind ! bind_bang
 #          bind '$' bind_dollar
 #        ";
 #      };
@@ -239,6 +239,7 @@
           end
         ";
       };
+
     };
   };
   home = {

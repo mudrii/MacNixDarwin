@@ -5,7 +5,8 @@ end
 
 # enables $$
 function bind_self
-  commandline -i (echo '%self')
+	#  commandline -i (echo '%self')
+  commandline -i (echo '$fish_pid')
 end
 
 # enable keybindings

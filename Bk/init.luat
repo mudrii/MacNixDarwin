@@ -1,0 +1,255 @@
+    vim.g.mapleader = " "  -- Set the global leader key to the space bar. The leader key is used in combination with other keys for custom key mappings.
+    vim.g.maplocalleader = ' '  -- Set the local leader key to the space bar. The local leader can be used for buffer-local key mappings.
+
+    -- Lualine
+    require('lualine').setup()  -- Initialize Lualine with default settings.
+  
+    -- CMP configuration
+    local cmp = require('cmp')
+    local luasnip = require('luasnip')
+
+    cmp.setup({
+        snippet = {
+            expand = function(args)
+                luasnip.lsp_expand(args.body)
+            end,
+    expand = function(args)
+      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+    end,
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), 
+    }),
+  sources = {
+    { name = 'nvim_lsp', group_index = 2 },
+    { name = 'luasnip', group_index = 2 },
+    { name = 'path', group_index = 2 },
+    { name = 'copilot', group_index = 2 },
+    { name = 'buffer', group_index = 2 },
+  }
+})
+
+    -- LSP configuration
+    
+    
+    -- GitHub Copilot configuration
+    require("copilot").setup({ 
+       suggestion = { enabled = false },
+           panel = { enabled = false },
+    })
+    
+    -- Colorscheme configuration
+    require('rose-pine').setup({
+      disable_background = true
+    })
+
+    function ColorMyPencils(color) 
+    	color = color or "rose-pine"
+    	vim.cmd.colorscheme(color)
+    	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+    	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    end
+
+    ColorMyPencils() 
+    
+    -- Comment configuration
+    require('Comment').setup() -- Initialize Comment with default settings.
+
+    vim.g.skip_ts_context_commentstring_module = true
+    
+    -- Toggleterm configuration
+    require("toggleterm").setup{ -- Initialize Toggleterm with default settings.
+      size = 20,
+     	open_mapping = [[<C-\>]],
+     	hide_numbers = true,
+     	shade_filetypes = {},
+     	shade_terminals = true,
+     	shading_factor = 2,
+     	start_in_insert = true,
+     	insert_mappings = true,
+     	persist_size = true,
+     	direction = "float",
+     	close_on_exit = true,
+     	shell = vim.o.shell,
+     	float_opts = {
+     	    border = "curved",
+     	    winblend = 0,
+     	    highlights = {
+    	        border = "Normal",
+   	  	background = "Normal",
+     	    },
+     	},
+    }
+    
+    function _G.set_terminal_keymaps()
+      local opts = {noremap = true}
+      vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', 'jk', [[<C-\><C-n>]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+      vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+    end
+
+    vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+
+    -- Telescope configuration      
+    local builtin = require('telescope.builtin')  -- Load the Telescope built-in functions.
+    vim.keymap.set('n', '<leader>ff', builtin.find_files, {})  -- Map <leader>ff to Telescope find_files function.
+    vim.keymap.set('n', '<leader>fr', builtin.live_grep, {})  -- Map <leader>fr to Telescope live_grep function.
+    vim.keymap.set('n', '<leader>fg', builtin.git_files, {})  -- Map <leader>fg to Telescope git_files function.
+    vim.keymap.set('n', '<leader>fb', builtin.buffers, {})  -- Map <leader>fb to Telescope buffers function.
+
+    -- Treesitter configuration
+    require'nvim-treesitter.configs'.setup {  -- Initialize Treesitter with a configuration table.
+      ensure_installed = {}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+      auto_install = false, -- if true, automatically install parsers for all languages
+      highlight = { enable = true }, -- false will disable the whole extension
+      indent = { enable = true }, -- false will disable the whole extension
+    }
+
+    -- Harpoon configuration
+    local harpoon = require("harpoon")  -- Load the Harpoon module.
+    harpoon:setup()  -- Initialize Harpoon with default settings.
+    vim.keymap.set("n", "<leader>ha", function() harpoon:list():append() end)  -- Map <leader>ha to append the current file to Harpoon list.
+    vim.keymap.set("n", "<leader>e", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)  -- Map <leader>e to toggle Harpoon quick menu.
+    vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)  -- Map <leader>1 to select the first item in Harpoon list.
+    vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end)  -- Map <leader>2 to select the second item in Harpoon list.
+    vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end)  -- Map <leader>3 to select the third item in Harpoon list.
+    vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)  -- Map <leader>4 to select the fourth item in Harpoon list.
+    
+    vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end) -- Map <C-S-P> to select the previous item in Harpoon list.
+    vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end) -- Map <C-S-N> to select the next item in Harpoon list.
+
+    -- Undotree configuration
+    vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)  -- Map <leader>u to toggle Undotree.
+
+    -- Fugitive configuration
+    vim.keymap.set("n", "<leader>gs", vim.cmd.Git)  -- Map <leader>gs to Git status (Fugitive plugin required).
+
+    -- configure nvim-tree
+    require("nvim-tree").setup({  -- Initialize nvim-tree with default settings.
+      sort = {
+          sorter = "case_sensitive",
+      },
+      view = {
+          width = 30,
+      },
+      renderer = {
+          group_empty = true,
+      },
+      filters = {
+          dotfiles = true,
+        },
+      })
+    
+      -- Key remappings
+      vim.keymap.set("n", "<leader>pv", vim.cmd.Ex) -- Open the command line window
+    
+      vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- Move the current line down in visual mode.
+      vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- Move the current line up in visual mode.
+
+      vim.keymap.set("n", "J", "mzJ`z") -- Join the current line with the line below.
+      vim.keymap.set("n", "<C-d>", "<C-d>zz") -- Scroll down half a page.
+      vim.keymap.set("n", "<C-u>", "<C-u>zz") -- Scroll up half a page.
+      vim.keymap.set("n", "n", "nzzzv") -- Center the cursor after jumping to the next match.
+      vim.keymap.set("n", "N", "Nzzzv") -- Center the cursor after jumping to the previous match.
+
+      vim.keymap.set("x", "<leader>p", [["_dP]]) -- Paste over the current selection.
+
+      vim.keymap.set({"n", "v"}, "<leader>y", [["+y]]) -- Copy to the system clipboard.
+      vim.keymap.set("n", "<leader>Y", [["+Y]]) -- Copy to the system clipboard until the end of the line.
+      vim.keymap.set({"n", "v"}, "<leader>d", [["_d]]) -- Cut to the system clipboard.
+
+      vim.keymap.set("n", "Q", "<nop>") -- Disable the Ex mode.
+      vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>") -- Open a new Tmux window with the tmux-sessionizer command.
+      vim.keymap.set("n", "<leader>f", vim.lsp.buf.format) -- Format the current buffer.
+
+      vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz") -- Jump to the next quickfix item.
+      vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz") -- Jump to the previous quickfix item.
+      vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz") -- Jump to the next location list item.
+      vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz") -- Jump to the previous location list item.
+
+      vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]) -- Replace the current word with the word under the cursor.
+      vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }) -- Make the current file executable.
+
+      -- window management
+      vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
+      vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
+      vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
+      vim.keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" }) -- close current split window
+
+      vim.keymap.set("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" }) -- open new tab
+      vim.keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>", { desc = "Close current tab" }) -- close current tab
+      vim.keymap.set("n", "<leader>tn", "<cmd>tabn<CR>", { desc = "Go to next tab" }) --  go to next tab
+      vim.keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" }) --  go to previous tab
+      vim.keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
+
+      -- General configuration options
+      vim.g.loaded_netrw = 1 -- Disable netrw.
+      vim.g.loaded_netrwPlugin = 1 -- Disable netrw plugin.
+    
+      vim.opt.termguicolors = true -- Enable 24-bit RGB color support.
+
+      vim.opt.guicursor = "" -- Set the cursor to a vertical bar.
+
+      vim.opt.nu = true -- Show line numbers.
+      vim.opt.relativenumber = true -- Show relative line numbers.
+    
+      -- tab & indentation
+      vim.opt.tabstop = 4 -- Set the tabstop to 4 spaces.
+      vim.opt.softtabstop = 4 -- Set the softtabstop to 4 spaces.
+      -- vim.opt.shiftwidth = 4 -- Set the shiftwidth to 4 spaces.
+      vim.opt.expandtab = true -- Use spaces instead of tabs.
+      -- vim.opt.smarttab = true -- Enable smart tabs.
+      -- vim.opt.cpoptions = 'I' -- Make tab insert indents instead of tabs.
+
+      -- vim.opt.smartindent = true -- Enable smart indentation.
+      vim.opt.breakindent = true -- Enable break indent.
+    
+      vim.opt.autoread = true -- Automatically reload files when they are changed outside of Neovim.
+
+      vim.opt.mouse = "a" -- Enable mouse support.  
+      vim.opt.clipboard = 'unnamedplus' -- Use the system clipboard.
+    
+      -- line wrapping
+      vim.opt.wrap = false -- Disable line wrapping.
+
+      vim.opt.swapfile = false -- Disable swap files.
+      vim.opt.backup = false -- Disable backup files.
+      vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Set the undodir to ~/.vim/undodir.
+      vim.opt.undofile = true -- Enable persistent undo.
+
+      vim.opt.hlsearch = false -- Disable search highlighting.
+      vim.opt.incsearch = true -- Enable incremental search.
+
+      -- search settings
+      vim.opt.smartcase = true  -- Enable smart case.
+      vim.opt.ignorecase = true -- Ignore case when searching.`
+
+      -- appearance
+      vim.opt.termguicolors = true -- Enable 24-bit RGB color support.
+      vim.opt.signcolumn = "yes"
+      vim.opt.background = "dark"
+
+      vim.opt.scrolloff = 8 -- Set the scrolloff to 8 lines.
+      vim.opt.signcolumn = "yes" -- Always show the sign column.
+      vim.opt.isfname:append("@-@") -- Add the @ character to the list of valid filename characters.
+
+      vim.opt.updatetime = 500 -- Set the updatetime to 500ms.
+      
+      -- Color setup
+      -- vim.opt.colorcolumn = "80" -- Set the colorcolumn to 80 characters.
+      -- vim.cmd ("colorscheme gruvbox") -- Set the color scheme to gruvbox.
+
+      -- split windows
+      vim.opt.splitright = true -- split vertical window to the right
+      vim.opt.splitbelow = true -- split horizontal window to the bottom

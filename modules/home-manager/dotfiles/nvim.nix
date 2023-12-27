@@ -5,20 +5,219 @@
     vimAlias = true;
     vimdiffAlias = true;
     defaultEditor = true;
+    extraPackages = with pkgs; [
+      lua-language-server
+      rnix-lsp
+    ];
+    extraLuaConfig = ''
+      local g = vim.g
+      local o = vim.opt
+      local c = vim.cmd
+      local a = vim.api
+      local k = vim.keymap.set
+      local ons = { noremap = true, silent = true }
+      
+      -- leader key configuration
+      g.mapleader = " "  -- Set the global leader key to the space bar.
+      g.maplocalleader = ' '  -- Set the local leader key to the space bar
+
+      -- options
+
+      -- display relative line number
+      o.number = true
+      o.relativenumber = true
+
+      -- search settings
+      o.smartcase = true  -- Enable smart case.
+      o.ignorecase = true -- Ignore case when searching.`
+      o.hlsearch = false -- Disable search highlighting.
+      o.incsearch = true -- Enable incremental search.
+
+      -- appearance
+      o.termguicolors = true -- Enable 24-bit RGB color support.
+      o.signcolumn = "yes"
+
+      -- key mappings
+      k("", "<Space>", "<Nop>", ons)
+      k("n", "<leader>pv", vim.cmd.Ex)
+      k("n", "<leader>q", vim.cmd.quit)
+
+      -- move lines
+      k("v", "J", ":m '>+1<CR>gv=gv")
+      k("v", "K", ":m '<-2<CR>gv=gv")
+
+      -- Join lines without inserting a space.
+      vim.keymap.set("n", "J", "mzJ`z")
+
+      -- Move windows with Ctrl + hjkl keys.
+      k("n", "<C-h>", "<C-w>h", ons)
+      k("n", "<C-j>", "<C-w>j", ons)
+      k("n", "<C-k>", "<C-w>k", ons)
+      k("n", "<C-l>", "<C-w>l", ons)
+
+      -- Center the cursor when searching.
+      k("n", "n", "nzzzv")
+      k("n", "N", "Nzzzv") 
+
+      -- vim api mappings
+      a.nvim_set_keymap('n', '<F5>', ':so $MYVIMRC<CR>', {noremap = true, silent = true})
+      '';
     plugins = with pkgs.vimPlugins; [
-      telescope-nvim # Telescope is a highly extendable fuzzy finder over lists.
-      comment-nvim # Comment out lines of code based on the file type.
+      {
+        plugin = nvim-web-devicons; # Show file icons in Nvim.
+        type = "lua";
+        config = ''
+          require'nvim-web-devicons'.setup{}
+        '';
+      }
+      {
+        plugin = lualine-nvim;
+        type = "lua";
+        config = ''
+          require('lualine').setup()
+        '';
+      }
+      {  
+	plugin = comment-nvim;
+        type = "lua";
+        config = ''
+          require('Comment').setup()
+	  g.skip_ts_context_commentstring_module = true
+        '';
+      }
+      {
+	plugin = undotree;
+	type = "lua";
+	config = ''
+          k("n", "<leader>u", vim.cmd.UndotreeToggle)
+	'';
+      }
+      {
+	plugin = copilot-lua;
+	type = "lua";
+	config = ''
+          require("copilot").setup({
+            suggestion = {
+              auto_trigger = true,
+            }
+	  }) 
+	'';  
+      }
+      {
+	plugin = vim-fugitive;
+	type = "lua";
+	config =''
+          k("n", "<leader>gs", vim.cmd.Git)
+	'';
+      }	
+      {
+	plugin = nvim-tree-lua;
+	type = "lua";
+	config =''
+          require("nvim-tree").setup()
+          k("n", "<leader>tr", ":NvimTreeToggle<CR>")
+	'';
+      }
+      {
+      	plugin = rose-pine;
+	type = "lua";
+	config = ''
+          require('rose-pine').setup({
+            disable_background = true
+          })
+          function ColorMyPencils(color) 
+      	    color = color or "rose-pine"
+      	    c.colorscheme(color)
+      	    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+      	    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+          end
+          ColorMyPencils() 
+      	'';
+      }
+      {
+	plugin = telescope-nvim;
+	type = "lua";
+	config = ''
+	  require('telescope').setup()
+	  k("n", "<leader>ff", ":Telescope find_files<CR>")
+	  k("n", "<leader>fg", ":Telescope live_grep<CR>")
+	  k("n", "<leader>fb", ":Telescope buffers<CR>")
+	  k("n", "<leader>fh", ":Telescope help_tags<CR>")
+	  '';
+      }
+      {
+      	plugin = harpoon2;
+	type = "lua";
+	config = ''
+	  local harpoon = require("harpoon")
+          harpoon:setup()
+
+	  k("n", "<leader>ha", function() harpoon:list():append() end)
+	  k("n", "<leader>he", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+	  k("n", "<leader>hh", function() harpoon:list():select(1) end)
+	  k("n", "<leader>hj", function() harpoon:list():select(2) end)
+	  k("n", "<leader>hk", function() harpoon:list():select(3) end)
+	  k("n", "<leader>hl", function() harpoon:list():select(4) end)
+	  k("n", "<leader>hp", function() harpoon:list():prev() end)
+	  k("n", "<leader>hn", function() harpoon:list():next() end)
+	  '';
+      }
+      {
+       	plugin = nvim-treesitter;
+	type = "lua";
+	config = ''
+    	  require'nvim-treesitter.configs'.setup {
+	    ensure_installed = {}, 
+	    auto_install = false,
+	    highlight = { enable = true }, 
+	    indent = { enable = true }, 
+    	  }
+	  '';
+      }
+      {
+      	plugin = toggleterm-nvim;
+	type = "lua";
+	config = ''
+	  require("toggleterm").setup{
+	    size = 20,
+	    open_mapping = [[<c-\>]],
+	    hide_numbers = true,
+	    shade_filetypes = {},
+	    shade_terminals = true,
+	    shading_factor = 1,
+	    start_in_insert = true,
+	    insert_mappings = true,
+	    persist_size = true,
+	    direction = 'float',
+	    close_on_exit = true,
+	    shell = vim.o.shell,
+	    float_opts = {
+	      border = 'single',
+	      winblend = 0,
+	      highlights = {
+	        border = "Normal",
+	        background = "Normal",
+	      },
+	    },
+	  }
+	  function _G.set_terminal_keymaps()
+	    local opts = {noremap = true}
+	    vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+ 	    vim.api.nvim_buf_set_keymap(0, 't', 'jk', [[<C-\><C-n>]], opts)
+  	    vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
+	    vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
+	    vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
+	    vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
+ 	  end
+
+ 	  vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+	  '';
+      }
+
       nvim-ts-context-commentstring # Set the commentstring based on the cursor location in the file.
-      nvim-web-devicons # Show file icons in Nvim.
-      gruvbox-nvim # A retro groove color scheme for Neovim.
-      tokyonight-nvim # A dark color scheme for Neovim.
-      onedark-nvim # A dark color scheme for Neovim.
-      lualine-nvim # A light and configurable statusline/tabline plugin for Neovim written in Lua.
-      toggleterm-nvim # A plugin for toggling terminals in Neovim.
-      harpoon2 # A navigation utility plugin for Neovim.
-      undotree # A plugin for visualizing undo history.
-      copilot-vim # A plugin for generating code with GitHub Copilot.
-      rose-pine # A color scheme for Neovim.
+      # gruvbox-nvim # A retro groove color scheme for Neovim.
+      # copilot-vim # A plugin for generating code with GitHub Copilot.
+      copilot-cmp 
       lsp-colors-nvim # A plugin for highlighting LSP diagnostics.
       nvim-lspconfig # A collection of configurations for Neovim's built-in LSP client.
       neodev-nvim # A plugin for configuring Neovim.
@@ -30,7 +229,6 @@
       cmp-nvim-lua # A Lua source for nvim-cmp.
       luasnip # A snippet engine for Neovim.
       friendly-snippets # A collection of snippets for LuaSnip.
-      vim-fugitive # A Git wrapper for Neovim.
       {
         plugin = (nvim-treesitter.withPlugins (p: [
           p.tree-sitter-nix 
@@ -40,13 +238,12 @@
           p.tree-sitter-python
           p.tree-sitter-c
           p.tree-sitter-rust
-          p.tree-sitter-c
           p.tree-sitter-json
           p.tree-sitter-go
           p.tree-sitter-typescript
           p.tree-sitter-javascript
           p.tree-sitter-yaml
-          p.tree-sitter-zig
+          p.tree-sitter-zig  
           p.tree-sitter-ocaml
           p.tree-sitter-java
           p.tree-sitter-fish
@@ -56,185 +253,5 @@
         ]));
       }
     ];
-
-    extraLuaConfig = ''
-      vim.g.mapleader = " "  -- Set the global leader key to the space bar. The leader key is used in combination with other keys for custom key mappings.
-      vim.g.maplocalleader = ' '  -- Set the local leader key to the space bar. The local leader can be used for buffer-local key mappings.
- 
-      -- Lualine
-      require('lualine').setup()  -- Initialize Lualine with default settings.
-    
-      -- CMP configuration
-      local cmp = require('cmp')
-      local luasnip = require('luasnip')
-
-      -- LSP configuration
-        
-
-      -- Colorscheme configuration
-      require('rose-pine').setup({
-        disable_background = true
-      })
-
-      function ColorMyPencils(color) 
-      	color = color or "rose-pine"
-      	vim.cmd.colorscheme(color)
-      	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-      	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-      end
-
-      ColorMyPencils() 
-      
-      -- Comment configuration
-      require('Comment').setup() -- Initialize Comment with default settings.
-
-      vim.g.skip_ts_context_commentstring_module = true
-      
-      -- Toggleterm configuration
-      require("toggleterm").setup{ -- Initialize Toggleterm with default settings.
-  	    size = 20,
-       	open_mapping = [[<C-\>]],
-       	hide_numbers = true,
-       	shade_filetypes = {},
-       	shade_terminals = true,
-       	shading_factor = 2,
-       	start_in_insert = true,
-       	insert_mappings = true,
-       	persist_size = true,
-       	direction = "float",
-       	close_on_exit = true,
-       	shell = vim.o.shell,
-       	float_opts = {
-       		border = "curved",
-       		winblend = 0,
-       		highlights = {
-      	    border = "Normal",
-     	  	  background = "Normal",
-       		},
-       	},
-      }
-      function _G.set_terminal_keymaps()
-        local opts = {noremap = true}
-        vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
-        vim.api.nvim_buf_set_keymap(0, 't', 'jk', [[<C-\><C-n>]], opts)
-        vim.api.nvim_buf_set_keymap(0, 't', '<C-h>', [[<C-\><C-n><C-W>h]], opts)
-        vim.api.nvim_buf_set_keymap(0, 't', '<C-j>', [[<C-\><C-n><C-W>j]], opts)
-        vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
-        vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
-      end
-
-      vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-
-      -- Telescope configuration      
-      local builtin = require('telescope.builtin')  -- Load the Telescope built-in functions.
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, {})  -- Map <leader>ff to Telescope find_files function.
-      vim.keymap.set('n', '<leader>fr', builtin.live_grep, {})  -- Map <leader>fr to Telescope live_grep function.
-      vim.keymap.set('n', '<leader>fg', builtin.git_files, {})  -- Map <leader>fg to Telescope git_files function.
-      vim.keymap.set('n', '<leader>fb', builtin.buffers, {})  -- Map <leader>fb to Telescope buffers function.
-
-      -- Treesitter configuration
-      require'nvim-treesitter.configs'.setup {  -- Initialize Treesitter with a configuration table.
-        ensure_installed = {}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-        auto_install = false, -- if true, automatically install parsers for all languages
-        highlight = { enable = true }, -- false will disable the whole extension
-        indent = { enable = true }, -- false will disable the whole extension
-      }
-
-      -- Harpoon configuration
-      local harpoon = require("harpoon")  -- Load the Harpoon module.
-      harpoon:setup()  -- Initialize Harpoon with default settings.
-      vim.keymap.set("n", "<leader>ha", function() harpoon:list():append() end)  -- Map <leader>ha to append the current file to Harpoon list.
-      vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)  -- Map <C-e> to toggle Harpoon quick menu.
-      vim.keymap.set("n", "<C-1>", function() harpoon:list():select(1) end)  -- Map <C-1> to select the first item in Harpoon list.
-      vim.keymap.set("n", "<C-2>", function() harpoon:list():select(2) end)  -- Map <C-2> to select the second item in Harpoon list.
-      vim.keymap.set("n", "<C-3>", function() harpoon:list():select(3) end)  -- Map <C-3> to select the third item in Harpoon list.
-      vim.keymap.set("n", "<C-4>", function() harpoon:list():select(4) end)  -- Map <C-4> to select the fourth item in Harpoon list.
-      
-      vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end) -- Map <C-S-P> to select the previous item in Harpoon list.
-      vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end) -- Map <C-S-N> to select the next item in Harpoon list.
-
-      -- Undotree configuration
-      vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)  -- Map <leader>u to toggle Undotree.
-
-      -- Fugitive configuration
-      vim.keymap.set("n", "<leader>gs", vim.cmd.Git)  -- Map <leader>gs to Git status (Fugitive plugin required).
-      
-      -- Key remappings
-      vim.keymap.set("n", "<leader>pv", vim.cmd.Ex) -- Open the command line window
-      
-      vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- Move the current line down in visual mode.
-      vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- Move the current line up in visual mode.
-
-      vim.keymap.set("n", "J", "mzJ`z") -- Join the current line with the line below.
-      vim.keymap.set("n", "<C-d>", "<C-d>zz") -- Scroll down half a page.
-      vim.keymap.set("n", "<C-u>", "<C-u>zz") -- Scroll up half a page.
-      vim.keymap.set("n", "n", "nzzzv") -- Center the cursor after jumping to the next match.
-      vim.keymap.set("n", "N", "Nzzzv") -- Center the cursor after jumping to the previous match.
-
-      vim.keymap.set("x", "<leader>p", [["_dP]]) -- Paste over the current selection.
-
-      vim.keymap.set({"n", "v"}, "<leader>y", [["+y]]) -- Copy to the system clipboard.
-      vim.keymap.set("n", "<leader>Y", [["+Y]]) -- Copy to the system clipboard until the end of the line.
-      vim.keymap.set({"n", "v"}, "<leader>d", [["_d]]) -- Cut to the system clipboard.
-
-      vim.keymap.set("n", "Q", "<nop>") -- Disable the Ex mode.
-      vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>") -- Open a new Tmux window with the tmux-sessionizer command.
-      vim.keymap.set("n", "<leader>f", vim.lsp.buf.format) -- Format the current buffer.
-
-      vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz") -- Jump to the next quickfix item.
-      vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz") -- Jump to the previous quickfix item.
-      vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz") -- Jump to the next location list item.
-      vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz") -- Jump to the previous location list item.
-
-      vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]) -- Replace the current word with the word under the cursor.
-      vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }) -- Make the current file executable.
-
-      -- General configuration options
-      vim.opt.termguicolors = true -- Enable 24-bit RGB color support.
-
-      vim.opt.guicursor = "" -- Set the cursor to a vertical bar.
-
-      vim.opt.nu = true -- Show line numbers.
-      vim.opt.relativenumber = true -- Show relative line numbers.
- 
-      -- vim.opt.tabstop = 4 -- Set the tabstop to 2 spaces.
-      -- vim.opt.softtabstop = 4 -- Set the softtabstop to 2 spaces.
-      -- vim.opt.shiftwidth = 4 -- Set the shiftwidth to 2 spaces.
-      vim.opt.expandtab = true -- Use spaces instead of tabs.
-      vim.opt.smarttab = true -- Enable smart tabs.
-      vim.opt.cpoptions = 'I' -- Make tab insert indents instead of tabs.
-
-      -- vim.opt.smartindent = true -- Enable smart indentation.
-      vim.opt.breakindent = true -- Enable break indent.
-      
-      vim.opt.autoread = true -- Automatically reload files when they are changed outside of Neovim.
-
-      vim.opt.mouse = "a" -- Enable mouse support.  
-      vim.opt.clipboard = 'unnamedplus' -- Use the system clipboard.
-
-      vim.opt.wrap = false -- Disable line wrapping.
-
-      vim.opt.swapfile = false -- Disable swap files.
-      vim.opt.backup = false -- Disable backup files.
-      vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Set the undodir to ~/.vim/undodir.
-      vim.opt.undofile = true -- Enable persistent undo.
-
-      vim.opt.hlsearch = false -- Disable search highlighting.
-      vim.opt.incsearch = true -- Enable incremental search.
-
-      vim.opt.smartcase = true  -- Enable smart case.
-      vim.opt.ignorecase = true -- Ignore case when searching.`
-
-      vim.opt.termguicolors = true -- Enable 24-bit RGB color support.
-
-      vim.opt.scrolloff = 8 -- Set the scrolloff to 8 lines.
-      vim.opt.signcolumn = "yes" -- Always show the sign column.
-      vim.opt.isfname:append("@-@") -- Add the @ character to the list of valid filename characters.
-
-      vim.opt.updatetime = 500 -- Set the updatetime to 500ms.
-
-      -- vim.opt.colorcolumn = "80" -- Set the colorcolumn to 80 characters.
-      -- vim.cmd ("colorscheme gruvbox") -- Set the color scheme to gruvbox.
-      '';
   };
 }

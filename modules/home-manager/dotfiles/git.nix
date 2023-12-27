@@ -6,7 +6,7 @@
     lfs.enable = true;
     userName = "mudrii";
     userEmail = "mudreac@gmail.com";
-    ignores = [ "*~" "*.swp" ".DS_Store" ];
+    ignores = [ "*~" "*.swp" ".DS_Store" "._.DS_Store" "**/.DS_Store" "**/._.DS_Store" ];
 /*
     signing = {
       key = "C37CEF50333B225E2FCA7D2003B8C6E70C3ED787";

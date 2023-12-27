@@ -47,16 +47,15 @@
       awscli2
       nodejs
       bun
-      lua
-      lua-language-server
-      rnix-lsp
+#      lua-language-server
+#      rnix-lsp
       pv
       ffmpeg
       universal-ctags
 #      github-copilot-cli
 #      open-interpreter
 #      openai
-      openai-whisper-cpp
+#      openai-whisper-cpp
 #      openai-whisper
 #      ollama
 #      powerline

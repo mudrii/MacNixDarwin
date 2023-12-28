@@ -108,7 +108,14 @@
       k("n", "<C-j>", "<C-w>j", ons)
       k("n", "<C-k>", "<C-w>k", ons)
       k("n", "<C-l>", "<C-w>l", ons)
-
+      
+      -- split windows horizontally and vertically
+      k("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
+      k("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
+      
+      k("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
+      k("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
+       
       -- navigate buffers
       k("n", "<S-l>", ":bnext<CR>", ons)
       k("n", "<S-h>", ":bprevious<CR>", ons)

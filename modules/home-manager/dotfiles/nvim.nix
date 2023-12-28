@@ -45,6 +45,10 @@
 
       -- wrap lines
       o.wrap = false
+      o.linebreak = true
+
+      -- file encodinf UTF-8
+      o.fileencoding = "utf-8"
 
       -- auto reload files changed outside of vim
       o.autoread = true
@@ -65,8 +69,15 @@
       o.signcolumn = "yes"
       o.guicursor = ""
       o.scrolloff = 8
+      o.sidescrolloff = 8
       -- vim.opt.colorcolumn = "80"
-      o.updatetime = 100
+      o.updatetime = 300
+      o.timeoutlen = 300
+      o.cursorline = true
+
+      -- split windows below and to the right
+      o.splitbelow = true
+      o.splitright = true
 
       -- key mappings
       k("n", "<leader>pv", vim.cmd.Ex)
@@ -278,6 +289,14 @@
      	    end
      	    vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 	      '';
+      }
+      {
+        plugin = which-key-nvim;
+        type = "lua";
+        config = ''
+          local wk = require("which-key")
+          wk.register(mappings, opts)
+        '';
       }
 
       nvim-ts-context-commentstring # Set the commentstring based on the cursor location in the file

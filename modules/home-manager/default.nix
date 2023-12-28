@@ -46,32 +46,29 @@
       bitwarden-cli
       awscli2
       nodejs
+      go
       bun
-#      lua-language-server
-#      rnix-lsp
       pv
       ffmpeg
       universal-ctags
-#      github-copilot-cli
-#      open-interpreter
-#      openai
-#      openai-whisper-cpp
-#      openai-whisper
-#      ollama
-#      powerline
+      # github-copilot-cli
+      # open-interpreter
+      # openai
+      # openai-whisper-cpp
+      # openai-whisper
+      # ollama
       poetry
       (
         python3.withPackages (
           ps: with ps; [
-#            powerline
             accelerate
             poetry-core
             pip
             pipx
             huggingface-hub
             openai
-#            openai-triton
-#            openai-whisper
+            # openai-triton
+            # openai-whisper
             langchain
             autogen
             pandas
@@ -79,7 +76,7 @@
             ipython
             jupyter
             boto3
-#            torch-bin
+            # torch-bin
             transformers
             torch
             torchvision

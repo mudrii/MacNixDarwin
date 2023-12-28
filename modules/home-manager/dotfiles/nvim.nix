@@ -47,8 +47,9 @@
       o.wrap = false
       o.linebreak = true
 
-      -- file encodinf UTF-8
+      -- file format and encodinf UTF-8
       o.fileencoding = "utf-8"
+      o,fileformats=unix
 
       -- auto reload files changed outside of vim
       o.autoread = true

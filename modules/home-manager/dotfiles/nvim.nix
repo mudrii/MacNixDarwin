@@ -49,7 +49,7 @@
 
       -- file format and encodinf UTF-8
       o.fileencoding = "utf-8"
-      o.fileformats=unix
+      o.fileformats = unix
 
       -- auto reload files changed outside of vim
       o.autoread = true

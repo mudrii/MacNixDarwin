@@ -81,12 +81,12 @@
     masApps = { };
     global = {
       brewfile = true;
-      autoUpdate = false;
+      autoUpdate = true;
     };
     onActivation = {
       autoUpdate = true;
       upgrade = true;
-#      extraFlags = [ "--verbose" ];
+     extraFlags = [ "--verbose" ];
     };
     casks = [ 
       "raycast" 

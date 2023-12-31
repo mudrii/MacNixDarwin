@@ -76,45 +76,13 @@
       set -x PAGER less
       set -x LESS -R
       set -x TERM xterm-256color
-      set -x VISUAL nvim
+      # set -x VISUAL nvim
       set -x EDITOR nvim
 
       # Do not show any greeting
       set --universal --erase fish_greeting
-#      function fish_greeting; end
+      # function fish_greeting; end
       
-      # Fish shell keybindings
-      # set --universal fish_key_bindings fish_vi_key_bindings
-      function fish_hybrid_key_bindings --description \
-      "Vi-style bindings that inherit emacs-style bindings in all modes"
-        for mode in default insert visual
-            fish_default_key_bindings -M $mode
-        end
-        fish_vi_key_bindings --no-erase
-      end
-      set -g fish_key_bindings fish_hybrid_key_bindings
-
-      function fish_mode_prompt
-        switch $fish_bind_mode
-          case default
-            set_color --bold red
-            echo 'N'
-          case insert
-            set_color --bold green
-            echo 'I'
-          case replace_one
-            set_color --bold green
-            echo 'R'
-          case visual
-            set_color --bold brmagenta
-            echo 'V'
-          case '*'
-            set_color --bold red
-            echo '?'
-        end
-        set_color normal
-      end
-
       # Kitty Shell Integration
       if set -q KITTY_INSTALLATION_DIR
         set --global KITTY_SHELL_INTEGRATION enabled
@@ -135,119 +103,170 @@
       # Atuin Integration
       set -gx ATUIN_SESSION (atuin uuid)
 
-    function _atuin_preexec --on-event fish_preexec
+      function _atuin_preexec --on-event fish_preexec
         if not test -n "$fish_private_mode"
-            set -gx ATUIN_HISTORY_ID (atuin history start -- "$argv[1]")
+          set -gx ATUIN_HISTORY_ID (atuin history start -- "$argv[1]")
         end
-    end
+      end
 
-    function _atuin_postexec --on-event fish_postexec
+      function _atuin_postexec --on-event fish_postexec
         set s $status
         if test -n "$ATUIN_HISTORY_ID"
-            RUST_LOG=error atuin history end --exit $s -- $ATUIN_HISTORY_ID &>/dev/null &
+          RUST_LOG=error atuin history end --exit $s -- $ATUIN_HISTORY_ID &>/dev/null &
             disown
         end
-    end
+      end
 
-    function _atuin_search
+      function _atuin_search
         set h (RUST_LOG=error atuin search $argv -i -- (commandline -b) 3>&1 1>&2 2>&3)
         commandline -f repaint
         if test -n "$h"
-            commandline -r $h
+          commandline -r $h
         end
-    end
+      end
 
-    function _atuin_bind_up
+      function _atuin_bind_up
         # Fallback to fish's builtin up-or-search if we're in search or paging mode
         if commandline --search-mode; or commandline --paging-mode
-            up-or-search
-            return
+          up-or-search
+          return
         end
 
-    # Only invoke atuin if we're on the top line of the command
-    set -l lineno (commandline --line)
-    switch $lineno
+      # Only invoke atuin if we're on the top line of the command
+      set -l lineno (commandline --line)
+      switch $lineno
         case 1
-            _atuin_search --shell-up-key-binding
+          _atuin_search --shell-up-key-binding
         case '*'
-            up-or-search
+          up-or-search
+        end
        end
-    end
 
-    bind \cr _atuin_search
-    bind -k up _atuin_bind_up
-    bind \eOA _atuin_bind_up
-    bind \e\[A _atuin_bind_up
-    if bind -M insert > /dev/null 2>&1
-    bind -M insert \cr _atuin_search
-    bind -M insert -k up _atuin_bind_up
-    bind -M insert \eOA _atuin_bind_up
-    bind -M insert \e\[A _atuin_bind_up
-    end
-        '';
+      bind \cr _atuin_search
+      bind -k up _atuin_bind_up
+      bind \eOA _atuin_bind_up
+      bind \e\[A _atuin_bind_up
+      if bind -M insert > /dev/null 2>&1
+      bind -M insert \cr _atuin_search
+      bind -M insert -k up _atuin_bind_up
+      bind -M insert \eOA _atuin_bind_up
+      bind -M insert \e\[A _atuin_bind_up
+      end
 
-    functions = {
-      __fish_command_not_found_handler = {
-        body = "__fish_default_command_not_found_handler $argv[1]";
-        onEvent = "fish_command_not_found";
-      };
-      sudobangbang = {
-        onEvent = "fish_preexec";
-        body = "abbr !! sudo $argv[1]";
-      };
-#      bind_status = {
-#        body = "commandline -i (echo '$status')";
-#      };
-#      bind_self = {
-#        body = "commandline -i (echo '$fish_pid')";
-#      };
-#      fish_user_key_bindings = {
-#        body = "
-#          bind '$?' bind_status
-#          bind '$$' bind_self
-#          # bind ! bind_bang
-#          bind '$' bind_dollar
-#        ";
-#      };
-#      bind_bang = {
-#        body = "
-#          switch (commandline -t)
-#          case '!'
-#            commandline -t $history[1]; commandline -f repaint
-#          case '*'
-#            commandline -i !
-#          end
-#        ";
-#      };
-#      bind_dollar = {
-#        body = "
-#          switch (commandline -t)
-#          case '!'
-#            commandline -t $history[1]; commandline -f repaint
-#          case '*'
-#            commandline -i '$'
-#          end
-#        ";
-#      };
-      bind_ctrl_r = {
-        body = "
-          switch (commandline -t)
-          case '^R'
-            commandline -t $history[1]; commandline -f repaint
-          case '*'
-            commandline -i '^R'
-          end
-        ";
-      };
+      function fish_hybrid_key_bindings --description \
+      "Vi-style bindings that inherit emacs-style bindings in all modes"
+      for mode in default insert visual
+        fish_default_key_bindings -M $mode
+      end
+      fish_vi_key_bindings --no-erase
+      end
+      set -g fish_key_bindings fish_hybrid_key_bindings
 
-    };
+      function fish_command_not_found
+        __fish_default_command_not_found_handler $argv
+      end
+
+    #   # enables $?
+    #   function bind_status
+    #     commandline -i (echo '$status')
+    #   end
+    #
+    #   # enables $$
+    #   function bind_self
+    # 	 commandline -i (echo '%self')
+    #    # commandline -i (echo '$fish_pid')
+    #   end
+    #
+    #   function bind_bang
+    #     switch (commandline -t)
+    #     case "!"
+    #       commandline -t $history[1]; commandline -f repaint
+    #     case "*"
+    #       commandline -i !
+    #     end
+    #   end
+    #
+    #   function bind_dollar
+    #     switch (commandline -t)
+    #     case "!"
+    #       commandline -t ""
+    #       commandline -f history-token-search-backward
+    #     case "*"
+    #       commandline -i '$'
+    #     end
+    #   end
+    #
+    #   # enable keybindings
+    #   function fish_user_key_bindings
+    #     bind '$?' bind_status
+    #     bind '$$' bind_self
+    #     bind `!` bind_bang
+    #     bind '$' bind_dollar
+    #   end
+    '';
+
+    # functions = {
+    #   __fish_command_not_found_handler = {
+    #     body = "__fish_default_command_not_found_handler $argv[1]";
+    #     onEvent = "fish_command_not_found";
+    #   };
+    #   sudobangbang = {
+    #     onEvent = "fish_preexec";
+    #     body = "abbr !! sudo $argv[1]";
+    #   };
+    #   bind_status = {
+    # #     body = "commandline -i (echo '$status')";
+    #   };
+    #   bind_self = {
+    #     body = "commandline -i (echo '$fish_pid')";
+    #   };
+    #   fish_user_key_bindings = {
+    #     body = "
+    #        bind '$?' bind_status
+    #       bind '$$' bind_self
+    #       # bind ! bind_bang
+    #       bind '$' bind_dollar
+    #     ";
+    #   };
+    #   bind_bang = {
+    #     body = "
+    #       switch (commandline -t)
+    #       case '!'
+    #         commandline -t $history[1]; commandline -f repaint
+    #       case '*'
+    #         commandline -i !
+    #       end
+    #     ";
+    #   };
+    #   bind_dollar = {
+    #     body = "
+    #       switch (commandline -t)
+    #       case '!'
+    #         commandline -t $history[1]; commandline -f repaint
+    #       case '*'
+    #         commandline -i '$'
+    #       end
+    #     ";
+    #   };
+    #   bind_ctrl_r = {
+    #     body = "
+    #       switch (commandline -t)
+    #       case '^R'
+    #         commandline -t $history[1]; commandline -f repaint
+    #       case '*'
+    #         commandline -i '^R'
+    #       end
+    #     ";
+    #   };
+    #
+    # };
   };
-  home = {
-    file = {
-      fish_user_key_bindings = {
-        source = ./fish/fish_user_key_bindings.fish;
-        target = ".config/fish/functions/fish_user_key_bindings.fish";
-      };
-    };
-  };
+#   home = {
+#     file = {
+#       fish_user_key_bindings = {
+#         source = ./fish/fish_user_key_bindings.fish;
+#         target = ".config/fish/functions/fish_user_key_bindings.fish";
+#       };
+#     };
+#   };
 }

@@ -47,6 +47,13 @@
       o.wrap = false
       o.linebreak = true
 
+      -- fold settings
+      o.foldmethod = "syntax"
+      o.foldlevel = 1
+      o.foldnestmax = 10
+      o.foldenable = false
+      o.foldcolumn = "1"
+
       -- file format and encodinf UTF-8
       o.fileencoding = "utf-8"
       o.fileformats = unix
@@ -67,6 +74,7 @@
       -- appearance
       o.termguicolors = true
       o.mouse = "a"
+      o.mousehide = true
       o.signcolumn = "yes"
       o.guicursor = ""
       o.scrolloff = 8
@@ -75,10 +83,15 @@
       o.updatetime = 300
       o.timeoutlen = 300
       o.cursorline = true
+      o.showmatch = true
+      o.backspace = 'indent,eol,start'
 
       -- split windows below and to the right
       o.splitbelow = true
       o.splitright = true
+      
+      -- Spell checking
+      o.spelllang = "en_us"
 
       -- key mappings
       k("n", "<leader>pv", vim.cmd.Ex)

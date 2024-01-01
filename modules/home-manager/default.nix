@@ -56,6 +56,7 @@
       pv
       ffmpeg
       universal-ctags
+      ollama
       # github-copilot-cli
       # open-interpreter
       # openai

@@ -96,6 +96,7 @@
       -- key mappings
       k("n", "<leader>pv", vim.cmd.Ex)
       k("n", "<leader>q", vim.cmd.quit)
+      k("n", "<leader>w", vim.cmd.write)
 
       -- move lines
       k("v", "J", ":m '>+1<CR>gv=gv")
@@ -214,8 +215,8 @@
       	config =''
           require("nvim-tree").setup()
           k("n", "<leader>tr", ":NvimTreeToggle<CR>")
-          -- g.loaded_netrw = 1
-          -- g.loaded_netrwPlugin = 1
+          g.loaded_netrw = 1
+          g.loaded_netrwPlugin = 1
       	'';
       }
       {

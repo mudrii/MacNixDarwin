@@ -29,8 +29,13 @@
     };
 
     packages = with pkgs; [
+      mas
       nix-tree
       git-lfs
+      tree
+      fzf
+      jq
+      gnupg
       wget
       nushell
       ripgrep

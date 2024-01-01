@@ -78,7 +78,32 @@
   homebrew = {
     enable = true;
     caskArgs.no_quarantine = true;
-    masApps = { };
+    masApps = {
+      "Yubico Authenticator" = 1497506650;
+      "Encrypto" = 935235287;
+      "Pixelmator Pro" = 1289583905;
+      "HotKey" = 975890633;
+      "StopTheMadness" = 1376402589;
+      "Goodnotes" = 1444383602;
+      "Orbot" = 1609461599;
+      "Keynote" = 409183694;
+      "GarageBand" = 682658836;
+      "ISD Go" = 1447072980;
+      "Numbers" = 409203825;
+      "Xcode" = 497799835;
+      "Bitwarden" = 1352778147;
+      "Pages" = 409201541;
+      "iMovie" = 408981434;
+      "Dropover" = 1355679052;
+      "Meeter" = 1510445899;
+      "System Monitor" = 423368786;
+      "UTM" = 1538878817;
+      "Battery Monitor" = 413678017;
+      "Telegram Lite" = 946399090;
+      "Velja" = 1607635845;
+      "Omnivore" = 1564031042;
+      "Keka" = 470158793;
+      };
     global = {
       brewfile = true;
       autoUpdate = true;
@@ -86,7 +111,8 @@
     onActivation = {
       autoUpdate = true;
       upgrade = true;
-     extraFlags = [ "--verbose" ];
+      cleanup = "uninstall";
+     # extraFlags = [ "--verbose" ];
     };
     casks = [ 
       "raycast" 
@@ -94,7 +120,11 @@
       "rsyncui" 
       "insomnia" 
       "podman-desktop" 
-      "google-drive" 
+      "google-drive"
+      "google-chrome"
+      "discord"
+      "slack"
+      "zoom"
     ];
     brews = [ 
       "trippy" 

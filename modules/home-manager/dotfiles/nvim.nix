@@ -319,6 +319,15 @@
           wk.register(mappings, opts)
         '';
       }
+      {
+        plugin = nvim-autopairs;
+        type = "lua";
+        config = ''
+          require('nvim-autopairs').setup({
+            disable_filetype = { "TelescopePrompt" , "vim" },
+          })
+        '';
+      }
 
       nvim-ts-context-commentstring # Set the commentstring based on the cursor location in the file
       # gruvbox-nvim # A retro groove color scheme for Neovim

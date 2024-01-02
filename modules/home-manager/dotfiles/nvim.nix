@@ -192,17 +192,6 @@
       	'';
       }
       {
-      	plugin = copilot-lua;
-      	type = "lua";
-      	config = ''
-          require("copilot").setup({
-            suggestion = {
-              auto_trigger = true,
-            }
-	        })
-      	''; 
-      }
-      {
       	plugin = vim-fugitive;
       	type = "lua";
       	config =''
@@ -309,7 +298,7 @@
 	          vim.api.nvim_buf_set_keymap(0, 't', '<C-k>', [[<C-\><C-n><C-W>k]], opts)
       	    vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
      	    end
-     	    vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+     	    c('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 	      '';
       }
       {
@@ -329,8 +318,29 @@
           })
         '';
       }
+      {
+        plugin = copilot-lua;
+        type = "lua";
+        config = ''
+          require("copilot").setup({
+            suggestion = {
+            auto_trigger = true,
+            }
+          })
+        ''; 
+      }
+      {
+        plugin = cmp-spell;
+        type = "lua";
+        config = ''
+          o.spell = true
+          o.spelllang = { 'en_us' }
+        '';
+      }
 
       nvim-ts-context-commentstring # Set the commentstring based on the cursor location in the file
+      plenary-nvim # A utility library for Neovim
+      nvim-dap # A plugin for debugging with Neovim
       # gruvbox-nvim # A retro groove color scheme for Neovim
       # copilot-vim # A plugin for generating code with GitHub Copilot
       copilot-cmp

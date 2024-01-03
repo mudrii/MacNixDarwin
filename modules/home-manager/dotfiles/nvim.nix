@@ -9,6 +9,9 @@
       lua
       lua-language-server
       rnix-lsp
+      gopls
+      pyright
+  }
     ];
     extraLuaConfig = ''
       -- remap nvim convenience functions

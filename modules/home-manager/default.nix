@@ -31,6 +31,7 @@
     packages = with pkgs; [
       mas
       nix-tree
+      nixpkgs-fmt
       git-lfs
       tree
       fzf
@@ -52,6 +53,8 @@
       awscli2
       nodejs
       go
+      zig
+      ocaml
       bun
       pv
       ffmpeg

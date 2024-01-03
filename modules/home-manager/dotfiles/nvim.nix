@@ -81,6 +81,7 @@
       o.sidescrolloff = 8
       -- vim.opt.colorcolumn = "80"
       o.updatetime = 300
+      o.timeout = true
       o.timeoutlen = 300
       o.cursorline = true
       o.showmatch = true
@@ -169,6 +170,37 @@
           require'nvim-web-devicons'.setup{}
         '';
       }
+      # {
+      #   plugin = rose-pine;
+      #   type = "lua";
+      #   config = ''
+      #     require('rose-pine').setup({
+      #         disable_background = true
+      #         })
+      #     function ColorMyPencils(color)
+      #       color = color or "rose-pine"
+      #       c.colorscheme(color)
+      #       vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+      #       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+      #     end
+      #     ColorMyPencils()
+      #   '';
+      # }
+      # {
+      #   plugin = catppuccin-nvim;
+      #   type = "lua";
+      #   config = ''
+      #     c.colorscheme "catppuccin-macchiato"  -- colorscheme latte, frappe, macchiato, mocha
+      #
+      #   '';
+      # }
+      {
+        plugin = tokyonight-nvim;
+        type = "lua";
+        config = ''
+          c.colorscheme "tokyonight-storm"  -- colorscheme storm, night, day, moon.
+        '';
+      }
       {
         plugin = lualine-nvim;
         type = "lua";
@@ -199,30 +231,14 @@
       	'';
       }	
       {
-      	plugin = nvim-tree-lua;
-      	type = "lua";
-      	config =''
+        plugin = nvim-tree-lua;
+        type = "lua";
+        config =''
           require("nvim-tree").setup()
           k("n", "<leader>tr", ":NvimTreeToggle<CR>")
           g.loaded_netrw = 1
           g.loaded_netrwPlugin = 1
-      	'';
-      }
-      {
-      	plugin = rose-pine;
-      	type = "lua";
-      	config = ''
-          require('rose-pine').setup({
-            disable_background = true
-          })
-          function ColorMyPencils(color)
-      	    color = color or "rose-pine"
-      	    c.colorscheme(color)
-      	    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-      	    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-          end
-          ColorMyPencils()
-      	'';
+          '';
       }
       {
       	plugin = telescope-nvim;
@@ -323,9 +339,11 @@
         type = "lua";
         config = ''
           require("copilot").setup({
-            suggestion = {
-            auto_trigger = true,
-            }
+            panel = { enabled = false },
+            suggestion = { 
+              enabled = true,
+              auto_trigger = true, 
+            },
           })
         ''; 
       }
@@ -337,12 +355,53 @@
           o.spelllang = { 'en_us' }
         '';
       }
-
+      {
+        plugin = nvim-cmp;
+        type = "lua";
+        config = ''
+          local cmp = require('cmp')
+          cmp.setup({
+            snippet = {
+              expand = function(args)
+                require('luasnip').lsp_expand(args.body)
+              end,
+            },
+            window = {
+              completion = cmp.config.window.bordered(),
+              documentation = cmp.config.window.bordered(),
+            },
+           mapping = cmp.mapping.preset.insert({
+              ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+              ['<C-f>'] = cmp.mapping.scroll_docs(4),
+              ['<C-Space>'] = cmp.mapping.complete(),
+              ['<C-e>'] = cmp.mapping.abort(),
+              ['<CR>'] = cmp.mapping.confirm({ select = true }),
+           }),
+            sources = cmp.config.sources({
+              { name = "luasnip" },
+              { name = "buffer" },
+              { name = "path" },
+              { name = "nvim_lua" },
+              { name = "nvim_lsp" },
+              { name = "copilot" },
+              { name = 'cmp-spell' },
+              { name = 'cmp_luasnip' },
+              { name = 'cmp-nvim-lsp' },
+              { name = 'cmp-nvim-lua' },
+            }),
+          })
+        '';
+      }
+      # {
+      #   plugin = luasnip;
+      #   type = "lua";
+      #   config = ''
+      #   
+      #   '';  
+      # }
       nvim-ts-context-commentstring # Set the commentstring based on the cursor location in the file
       plenary-nvim # A utility library for Neovim
       nvim-dap # A plugin for debugging with Neovim
-      # gruvbox-nvim # A retro groove color scheme for Neovim
-      # copilot-vim # A plugin for generating code with GitHub Copilot
       copilot-cmp
       lsp-colors-nvim # A plugin for highlighting LSP diagnostics
       nvim-lspconfig # A collection of configurations for Neovim's built-in LSP client
@@ -350,6 +409,7 @@
       nvim-cmp # A completion plugin for Neovim
       cmp-buffer # A buffer source for nvim-cmp
       cmp-path # A path source for nvim-cmp
+      cmp-cmdline 
       cmp_luasnip # A LuaSnip source for nvim-cmp
       cmp-nvim-lsp # A LSP source for nvim-cmp
       cmp-nvim-lua # A Lua source for nvim-cmp

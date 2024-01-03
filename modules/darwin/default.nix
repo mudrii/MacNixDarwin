@@ -118,7 +118,6 @@
       "raycast" 
       "amethyst" 
       "rsyncui" 
-      "wiresharck"
       "insomnia" 
       "podman-desktop" 
       "google-drive"

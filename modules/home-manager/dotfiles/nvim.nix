@@ -6,6 +6,8 @@
     vimdiffAlias = true;
     defaultEditor = true;
     extraPackages = with pkgs; [
+      # nodejs_21
+      # nodePackages_latest.ttypescript-language-server
       lua
       lua-language-server
       rnix-lsp
@@ -355,61 +357,71 @@
         '';
       }
       {
+        plugin = nvim-lspconfig;
+        type = "lua";
+        config = ''
+
+        '';
+      }
+      {
         plugin = nvim-cmp;
         type = "lua";
         config = ''
-          local cmp = require('cmp')
+          local cmp = require("cmp")
+          local luasnip = require("luasnip")
+          local lspkind = require("lspkind")
+          require("luasnip.loaders.from_vscode").lazy_load()
           cmp.setup({
-            snippet = {
+            completion = {
+              completeopt = "menu,menuone,preview,noselect",
+            },
+            snippet = { -- configure how nvim-cmp interacts with snippet engine
               expand = function(args)
-                require('luasnip').lsp_expand(args.body)
+                luasnip.lsp_expand(args.body)
               end,
             },
-            window = {
-              completion = cmp.config.window.bordered(),
-              documentation = cmp.config.window.bordered(),
-            },
-           mapping = cmp.mapping.preset.insert({
-              ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-              ['<C-f>'] = cmp.mapping.scroll_docs(4),
-              ['<C-Space>'] = cmp.mapping.complete(),
-              ['<C-e>'] = cmp.mapping.abort(),
-              ['<CR>'] = cmp.mapping.confirm({ select = true }),
-           }),
-            sources = cmp.config.sources({
-              { name = "copilot", group_index = 2 },
-              { name = "luasnip" },
-              { name = "buffer" },
-              { name = "path" },
-              { name = "nvim_lua" },
-              { name = "nvim_lsp" },
-              { name = 'cmp-spell' },
-              { name = 'cmp_luasnip' },
-              { name = 'cmp-nvim-lsp' },
-              { name = 'cmp-nvim-lua' },
+            mapping = cmp.mapping.preset.insert({
+              ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+              ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
+              ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+              ["<C-f>"] = cmp.mapping.scroll_docs(4),
+              ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
+              ["<C-e>"] = cmp.mapping.abort(), -- close completion window
+              ["<CR>"] = cmp.mapping.confirm({ select = false }),
             }),
+            -- sources for autocompletion
+            sources = cmp.config.sources({
+              { name = "copilot" },
+              { name = "nvim_lsp" },
+              { name = "luasnip" }, -- snippets
+              { name = "buffer" }, -- text within current buffer
+              { name = "path" }, -- file system paths
+            }),
+            -- configure lspkind for vs-code like pictograms in completion menu
+            formatting = {
+              format = lspkind.cmp_format({
+                maxwidth = 50,
+                ellipsis_char = "...",
+              }),
+            },
           })
-        '';
+       '';
       }
-      # {
-      #   plugin = luasnip;
-      #   type = "lua";
-      #   config = ''
-      #   
-      #   '';  
-      # }
+      dressing-nvim
+      lspkind-nvim
       nvim-ts-context-commentstring # Set the commentstring based on the cursor location in the file
       plenary-nvim # A utility library for Neovim
       nvim-dap # A plugin for debugging with Neovim
-      copilot-cmp
+      copilot-cmp # copilot-cmp integration with nvim-cmp
       lsp-colors-nvim # A plugin for highlighting LSP diagnostics
       nvim-lspconfig # A collection of configurations for Neovim's built-in LSP client
       neodev-nvim # A plugin for configuring Neovim
       nvim-cmp # A completion plugin for Neovim
       cmp-buffer # A buffer source for nvim-cmp
       cmp-path # A path source for nvim-cmp
-      cmp-cmdline 
+      cmp-cmdline # cmp command line
       cmp_luasnip # A LuaSnip source for nvim-cmp
+      cmp-look # 
       cmp-nvim-lsp # A LSP source for nvim-cmp
       cmp-nvim-lua # A Lua source for nvim-cmp
       luasnip # A snippet engine for Neovim

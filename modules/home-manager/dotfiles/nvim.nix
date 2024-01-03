@@ -11,7 +11,6 @@
       rnix-lsp
       gopls
       pyright
-  }
     ];
     extraLuaConfig = ''
       -- remap nvim convenience functions
@@ -103,19 +102,19 @@
       k("n", "<leader>w", vim.cmd.write)
 
       -- move lines
-      k("v", "J", ":m '>+1<CR>gv=gv")
-      k("v", "K", ":m '<-2<CR>gv=gv")
+      k("v", "J", ":m '>+1<CR>gv=gv", ons)
+      k("v", "K", ":m '<-2<CR>gv=gv", ons)
 
       -- join lines without inserting a space
-      vim.keymap.set("n", "J", "mzJ`z")
+      vim.keymap.set("n", "J", "mzJ`z", ons)
 
       -- paste over the current selection
-      k("x", "<leader>p", [["_dP]])
+      k("x", "<leader>p", [["_dP]], ons)
 
       -- copy/cut to the system clipboard
-      k({"n", "v"}, "<leader>y", [["+y]])
-      k({"n", "v"}, "<leader>d", [["_d]])
-      k("n", "<leader>Y", [["+Y]])
+      k({"n", "v"}, "<leader>y", [["+y]], ons)
+      k({"n", "v"}, "<leader>d", [["_d]], ons)
+      k("n", "<leader>Y", [["+Y]], ons)
       o.clipboard = 'unnamedplus'
 
       -- press jk/kj fast to exit insert mode 
@@ -343,10 +342,7 @@
         config = ''
           require("copilot").setup({
             panel = { enabled = false },
-            suggestion = { 
-              enabled = true,
-              auto_trigger = true, 
-            },
+            suggestion = { enabled = false },
           })
         ''; 
       }
@@ -381,12 +377,12 @@
               ['<CR>'] = cmp.mapping.confirm({ select = true }),
            }),
             sources = cmp.config.sources({
+              { name = "copilot", group_index = 2 },
               { name = "luasnip" },
               { name = "buffer" },
               { name = "path" },
               { name = "nvim_lua" },
               { name = "nvim_lsp" },
-              { name = "copilot" },
               { name = 'cmp-spell' },
               { name = 'cmp_luasnip' },
               { name = 'cmp-nvim-lsp' },

@@ -6,13 +6,16 @@
     vimdiffAlias = true;
     defaultEditor = true;
     extraPackages = with pkgs; [
-      # nodejs_21
-      # nodePackages_latest.ttypescript-language-server
+      nil
       lua
       lua-language-server
       rnix-lsp
       gopls
       pyright
+      black
+      pylint
+      nodePackages.typescript
+      nodePackages.typescript-language-server
     ];
     extraLuaConfig = ''
       -- remap nvim convenience functions
@@ -209,7 +212,7 @@
         plugin = lualine-nvim;
         type = "lua";
         config = ''
-          require('lualine').setup()
+          require("lualine").setup()
         '';
       }
       {  
@@ -338,16 +341,16 @@
           })
         '';
       }
-      {
-        plugin = copilot-lua;
-        type = "lua";
-        config = ''
-          require("copilot").setup({
-            panel = { enabled = false },
-            suggestion = { enabled = false },
-          })
-        ''; 
-      }
+      # {
+      #   plugin = copilot-lua;
+      #   type = "lua";
+      #   config = ''
+      #     require("copilot").setup({
+      #       panel = { enabled = false },
+      #       suggestion = { enabled = false },
+      #     })
+      #   ''; 
+      # }
       {
         plugin = cmp-spell;
         type = "lua";
@@ -356,57 +359,91 @@
           o.spelllang = { 'en_us' }
         '';
       }
+      # {
+      #   plugin = none-ls-nvim;
+      #   type = "lua";
+      #   config = ''
+      #     local null_ls = require("null-ls")
+      #     null_ls.setup({
+      #         sources = {
+      #         null_ls.builtins.formatting.stylua,
+      #         null_ls.builtins.formatting.prettier,
+      #         null_ls.builtins.diagnostics.erb_lint,
+      #         null_ls.builtins.diagnostics.eslint_d,
+      #         null_ls.builtins.diagnostics.rubocop,
+      #         null_ls.builtins.formatting.rubocop,
+      #         },
+      #         })
+      #   vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+      #     '';
+      # }
       {
         plugin = nvim-lspconfig;
         type = "lua";
         config = ''
+          local capabilities = require('cmp_nvim_lsp').default_capabilities()
+          local lspconfig = require("lspconfig")
+          -- lspconfig.tsserver.setup({
+          --   capabilities = capabilities
+          -- })
+          -- lspconfig.html.setup({
+          --   capabilities = capabilities
+          -- })
+          lspconfig.lua_ls.setup({
+            capabilities = capabilities
+          })
+
+          k("n", "K", vim.lsp.buf.hover, {})
+          k("n", "<leader>gd", vim.lsp.buf.definition, {})
+          k("n", "<leader>gr", vim.lsp.buf.references, {})
+          k("n", "<leader>ca", vim.lsp.buf.code_action, {})
 
         '';
       }
-      {
-        plugin = nvim-cmp;
-        type = "lua";
-        config = ''
-          local cmp = require("cmp")
-          local luasnip = require("luasnip")
-          local lspkind = require("lspkind")
-          require("luasnip.loaders.from_vscode").lazy_load()
-          cmp.setup({
-            completion = {
-              completeopt = "menu,menuone,preview,noselect",
-            },
-            snippet = { -- configure how nvim-cmp interacts with snippet engine
-              expand = function(args)
-                luasnip.lsp_expand(args.body)
-              end,
-            },
-            mapping = cmp.mapping.preset.insert({
-              ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-              ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
-              ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-              ["<C-f>"] = cmp.mapping.scroll_docs(4),
-              ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-              ["<C-e>"] = cmp.mapping.abort(), -- close completion window
-              ["<CR>"] = cmp.mapping.confirm({ select = false }),
-            }),
-            -- sources for autocompletion
-            sources = cmp.config.sources({
-              { name = "copilot" },
-              { name = "nvim_lsp" },
-              { name = "luasnip" }, -- snippets
-              { name = "buffer" }, -- text within current buffer
-              { name = "path" }, -- file system paths
-            }),
-            -- configure lspkind for vs-code like pictograms in completion menu
-            formatting = {
-              format = lspkind.cmp_format({
-                maxwidth = 50,
-                ellipsis_char = "...",
-              }),
-            },
-          })
-       '';
-      }
+      # {
+      #   plugin = nvim-cmp;
+      #   type = "lua";
+      #   config = ''
+      #     local cmp = require("cmp")
+      #     local luasnip = require("luasnip")
+      #     local lspkind = require("lspkind")
+      #     require("luasnip.loaders.from_vscode").lazy_load()
+      #     cmp.setup({
+      #       completion = {
+      #         completeopt = "menu,menuone,preview,noselect",
+      #       },
+      #       snippet = { -- configure how nvim-cmp interacts with snippet engine
+      #         expand = function(args)
+      #           luasnip.lsp_expand(args.body)
+      #         end,
+      #       },
+      #       mapping = cmp.mapping.preset.insert({
+      #         ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+      #         ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
+      #         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+      #         ["<C-f>"] = cmp.mapping.scroll_docs(4),
+      #         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
+      #         ["<C-e>"] = cmp.mapping.abort(), -- close completion window
+      #         ["<CR>"] = cmp.mapping.confirm({ select = false }),
+      #       }),
+      #       -- sources for autocompletion
+      #       sources = cmp.config.sources({
+      #         -- { name = "copilot" },
+      #         { name = "nvim_lsp" },
+      #         { name = "luasnip" }, -- snippets
+      #         { name = "buffer" }, -- text within current buffer
+      #         { name = "path" }, -- file system paths
+      #       }),
+      #       -- configure lspkind for vs-code like pictograms in completion menu
+      #       formatting = {
+      #         format = lspkind.cmp_format({
+      #           maxwidth = 50,
+      #           ellipsis_char = "...",
+      #         }),
+      #       },
+      #     })
+      #  '';
+      # }
       dressing-nvim
       lspkind-nvim
       nvim-ts-context-commentstring # Set the commentstring based on the cursor location in the file

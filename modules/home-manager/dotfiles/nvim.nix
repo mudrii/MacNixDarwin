@@ -195,8 +195,8 @@
           p.tree-sitter-sql
         ]));
       }
-      dressing-nvim #
-      lspkind-nvim #
+      dressing-nvim # A plugin for dressing up your Neovim. 
+      lspkind-nvim # A plugin for dressing up your Neovim.
       nvim-ts-context-commentstring # Set the commentstring based on the cursor location in the file
       plenary-nvim # A utility library for Neovim
       nvim-dap # A plugin for debugging with Neovim
@@ -209,7 +209,7 @@
       cmp-path # A path source for nvim-cmp
       cmp-cmdline # cmp command line
       cmp_luasnip # A LuaSnip source for nvim-cmp
-      cmp-look #
+      cmp-look # A look source for nvim-cmp
       cmp-nvim-lsp # A LSP source for nvim-cmp
       cmp-nvim-lua # A Lua source for nvim-cmp
       luasnip # A snippet engine for Neovim
@@ -352,8 +352,8 @@
         type = "lua";
         config = ''
           require("copilot").setup({
-           --  panel = { enabled = false },
-           --  suggestion = { enabled = false },
+            panel = { enabled = false },
+            suggestion = { enabled = false },
           })
         ''; 
       }
@@ -416,7 +416,7 @@
             }),
             -- sources for autocompletion
             sources = cmp.config.sources({
-              -- { name = "copilot" },
+              { name = "copilot" },
               { name = "nvim_lsp" },
               { name = "luasnip" }, -- snippets
               { name = "buffer" }, -- text within current buffer

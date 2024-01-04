@@ -53,6 +53,7 @@
       awscli2
       nodejs
       go
+      gotools
       zig
       ocaml
       bun

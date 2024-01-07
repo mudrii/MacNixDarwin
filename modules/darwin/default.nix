@@ -125,6 +125,7 @@
       "discord"
       "slack"
       "zoom"
+      "miniconda"
     ];
     brews = [ 
       "trippy" 

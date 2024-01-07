@@ -38,7 +38,7 @@
         set -g visual-activity on
 
         bind - split-window -v
-        bind \\ split-window -h
+        bind \  split-window -h
 
         bind C-f command-prompt -p find-session 'switch-client -t %%'
 

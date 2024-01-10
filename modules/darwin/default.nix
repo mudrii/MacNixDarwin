@@ -117,15 +117,21 @@
     casks = [ 
       "raycast" 
       "amethyst" 
-      "rsyncui" 
-      "insomnia" 
+      "rsyncui"
+      "grammarly-desktop" 
+      "little-snitch"
+      "insomnia"
+      "firefox"
       "podman-desktop" 
       "google-drive"
       "google-chrome"
       "discord"
       "slack"
+      "soulver"
+      "soulver-cli"
       "zoom"
       "miniconda"
+      "ollama"
     ];
     brews = [ 
       "trippy" 

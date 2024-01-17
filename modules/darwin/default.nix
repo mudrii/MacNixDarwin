@@ -84,6 +84,7 @@
       "Pixelmator Pro" = 1289583905;
       "HotKey" = 975890633;
       "StopTheMadness" = 1376402589;
+      # "StopTheMadness Pro" = 2118554294;
       "Goodnotes" = 1444383602;
       "Orbot" = 1609461599;
       "Keynote" = 409183694;

@@ -83,8 +83,8 @@
       "Encrypto" = 935235287;
       "Pixelmator Pro" = 1289583905;
       "HotKey" = 975890633;
-      "StopTheMadness" = 1376402589;
-      # "StopTheMadness Pro" = 2118554294;
+      # "StopTheMadness" = 1376402589;
+      "StopTheMadness Pro" = 6471380298;
       "Goodnotes" = 1444383602;
       "Orbot" = 1609461599;
       "Keynote" = 409183694;

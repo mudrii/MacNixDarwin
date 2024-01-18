@@ -66,7 +66,7 @@
       # openai
       # openai-whisper-cpp
       # openai-whisper
-      # poetry
+      poetry
       (
         python3.withPackages (
           ps: with ps; [

@@ -66,6 +66,7 @@
       # openai
       # openai-whisper-cpp
       # openai-whisper
+      gnutls
       poetry
       (
         python3.withPackages (
@@ -74,8 +75,8 @@
             poetry-core
             pip
             pipx
-            huggingface-hub
             openai
+            huggingface-hub
             # openai-triton
             # openai-whisper
             langchain

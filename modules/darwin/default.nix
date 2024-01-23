@@ -104,6 +104,7 @@
       "Velja" = 1607635845;
       "Omnivore" = 1564031042;
       "Keka" = 470158793;
+      # "Todoist" = 585829637;
       };
     global = {
       brewfile = true;
@@ -122,8 +123,9 @@
       "grammarly-desktop" 
       "little-snitch"
       "insomnia"
+      "postman"
       "firefox"
-      "podman-desktop" 
+      "podman-desktop"
       "google-drive"
       "google-chrome"
       "discord"
@@ -133,12 +135,14 @@
       "zoom"
       "miniconda"
       "ollama"
+      "authy"
+      "viber"
     ];
     brews = [ 
       "trippy" 
       "podman" 
       "sha2"
-      "openai-whisper"
+      # "openai-whisper"
     ];
     taps = [ "fujiapple852/trippy" ];
   };

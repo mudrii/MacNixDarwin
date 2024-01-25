@@ -117,6 +117,7 @@
      # extraFlags = [ "--verbose" ];
     };
     casks = [ 
+      "latest"
       "raycast" 
       "amethyst" 
       "rsyncui"
@@ -130,13 +131,17 @@
       "google-chrome"
       "discord"
       "slack"
+      "zoom"
+      "viber"
       "soulver"
       "soulver-cli"
-      "zoom"
       "miniconda"
       "ollama"
+      "lm-studio"
       "authy"
-      "viber"
+      "zotero"
+      "figma"
+      "maccy"
     ];
     brews = [ 
       "trippy" 

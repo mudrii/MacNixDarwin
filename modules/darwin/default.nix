@@ -125,6 +125,7 @@
       "little-snitch"
       "insomnia"
       "postman"
+      "arc"
       "firefox"
       "podman-desktop"
       "google-drive"

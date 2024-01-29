@@ -74,16 +74,15 @@
   };
 
   # backwards compatibility; don't change
-  system.stateVersion = 4;
-  homebrew = {
+  system.stateVersion = 4; 
+  homebrew = { 
     enable = true;
-    caskArgs.no_quarantine = true;
+    # caskArgs.no_quarantine = true;
     masApps = {
       "Yubico Authenticator" = 1497506650;
       "Encrypto" = 935235287;
       "Pixelmator Pro" = 1289583905;
       "HotKey" = 975890633;
-      # "StopTheMadness" = 1376402589;
       "StopTheMadness Pro" = 6471380298;
       "Goodnotes" = 1444383602;
       "Orbot" = 1609461599;
@@ -104,18 +103,15 @@
       "Velja" = 1607635845;
       "Omnivore" = 1564031042;
       "Keka" = 470158793;
-      # "Todoist" = 585829637;
       };
     global = {
       brewfile = true;
       autoUpdate = true;
     };
     onActivation = {
-      autoUpdate = true;
       upgrade = true;
       cleanup = "uninstall";
-     # extraFlags = [ "--verbose" ];
-    };
+      };
     casks = [ 
       "latest"
       "raycast" 
@@ -142,6 +138,7 @@
       "authy"
       "zotero"
       "figma"
+      "drawio"
       "maccy"
     ];
     brews = [ 

@@ -79,30 +79,25 @@
     enable = true;
     # caskArgs.no_quarantine = true;
     masApps = {
-      "Yubico Authenticator" = 1497506650;
-      "Encrypto" = 935235287;
-      "Pixelmator Pro" = 1289583905;
-      "HotKey" = 975890633;
-      "StopTheMadness Pro" = 6471380298;
-      "Goodnotes" = 1444383602;
-      "Orbot" = 1609461599;
-      "Keynote" = 409183694;
-      "GarageBand" = 682658836;
-      "ISD Go" = 1447072980;
-      "Numbers" = 409203825;
-      "Xcode" = 497799835;
-      "Bitwarden" = 1352778147;
-      "Pages" = 409201541;
-      "iMovie" = 408981434;
-      "Dropover" = 1355679052;
-      "Meeter" = 1510445899;
-      "System Monitor" = 423368786;
-      "UTM" = 1538878817;
       "Battery Monitor" = 413678017;
+      "Dropover" = 1355679052;
+      "Encrypto" = 935235287;
+      "HotKey" = 975890633;
+      "ISD Go" = 1447072980;
+      "Keynote" = 409183694;
+      "Meeter" = 1510445899;
+      "Numbers" = 409203825;
+      # "Omnivore" = 1564031042;
+      "Orbot" = 1609461599;
+      "Pages" = 409201541;
+      "Pixelmator Pro" = 1289583905;
+      "StopTheMadness Pro" = 6471380298;
+      "System Monitor" = 423368786;
       "Telegram Lite" = 946399090;
+      "UTM" = 1538878817;
       "Velja" = 1607635845;
-      "Omnivore" = 1564031042;
-      "Keka" = 470158793;
+      "Xcode" = 497799835;
+      "iMovie" = 408981434;
       };
     global = {
       brewfile = true;
@@ -113,38 +108,44 @@
       cleanup = "uninstall";
       };
     casks = [ 
-      "latest"
-      "raycast" 
       "amethyst" 
-      "rsyncui"
-      "grammarly-desktop" 
-      "little-snitch"
-      "insomnia"
-      "postman"
       "arc"
-      "firefox"
-      "podman-desktop"
-      "google-drive"
-      "google-chrome"
+      "authy"
+      "bitwarden"
       "discord"
-      "slack"
-      "zoom"
-      "viber"
-      "soulver"
-      "soulver-cli"
+      "downie"
+      "drawio"
+      "figma"
+      "firefox"
+      "google-chrome"
+      "google-drive"
+      "grammarly-desktop" 
+      "insomnia"
+      "keka"
+      "latest"
+      "little-snitch"
+      "lm-studio"
+      "maccy"
       "miniconda"
       "ollama"
-      "lm-studio"
-      "authy"
+      "podman-desktop"
+      "postman"
+      "raycast" 
+      "rsyncui"
+      "slack"
+      "soulver"
+      "soulver-cli"
+      "viber"
+      "whatsapp"
+      "yubico-authenticator"
+      "yubico-yubikey-manager"
+      "zoom"
       "zotero"
-      "figma"
-      "drawio"
-      "maccy"
     ];
     brews = [ 
-      "trippy" 
       "podman" 
       "sha2"
+      "trippy" 
       # "openai-whisper"
     ];
     taps = [ "fujiapple852/trippy" ];

@@ -29,70 +29,71 @@
     };
 
     packages = with pkgs; [
-      mas
-      nix-tree
-      nixpkgs-fmt
-      git-lfs
-      tree
-      fzf
-      jq
-      gnupg
-      wget
-      nushell
-      ripgrep
-      fd
-      curl
-      less
-      highlight
-      lf
-      gh
-      tree
-      parallel
-      nix-tree
-      bitwarden-cli
-      awscli2
-      nodejs
-      go
-      gotools
-      zig
-      ocaml
-      bun
-      pv
-      ffmpeg
-      universal-ctags
-      ollama
       # github-copilot-cli
       # open-interpreter
       # openai
-      # openai-whisper-cpp
       # openai-whisper
+      # openai-whisper-cpp
+      awscli2
+      bitwarden-cli
+      bun
+      curl
+      fd
+      ffmpeg
+      fzf
+      gh
+      git-lfs
+      gnupg
+      go
+      gotools
+      highlight
+      jq
+      less
+      lf
+      mas
+      nix-tree
+      nix-tree
+      nixpkgs-fmt
+      nodejs
+      nushell
+      ocaml
+      ollama
+      parallel
+      pv
+      ripgrep
+      tree
+      tree
+      universal-ctags
+      wget
+      zig
       gnutls
       poetry
       (
         python3.withPackages (
           ps: with ps; [
-            accelerate
-            poetry-core
-            pip
-            pipx
-            openai
-            huggingface-hub
+            # langchain
             # openai-triton
             # openai-whisper
-            langchain
+            # torch-bin
+            safetensors
+            # accelerate
             autogen
-            pandas
-            tiktoken
+            boto3
+            huggingface-hub
             ipython
             jupyter
-            boto3
-            # torch-bin
-            transformers
-            torch
-            torchvision
-            torchaudio
             numpy
+            openai
+            pandas
+            pip
+            pipx
+            poetry-core
             pygments
+            tiktoken
+            torch
+            torchaudio
+            torchvision
+            transformers
             xstatic-pygments
           ]
         )

@@ -87,7 +87,7 @@
       "Keynote" = 409183694;
       "Meeter" = 1510445899;
       "Numbers" = 409203825;
-      # "Omnivore" = 1564031042;
+      "Omnivore" = 1564031042;
       "Orbot" = 1609461599;
       "Pages" = 409201541;
       "Pixelmator Pro" = 1289583905;
@@ -143,6 +143,7 @@
       "zotero"
     ];
     brews = [ 
+      "p7zip"
       "podman" 
       "sha2"
       "trippy" 

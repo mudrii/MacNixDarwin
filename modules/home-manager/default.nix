@@ -52,7 +52,6 @@
       lf
       mas
       nix-tree
-      nix-tree
       nixpkgs-fmt
       nodejs
       nushell
@@ -61,7 +60,6 @@
       parallel
       pv
       ripgrep
-      tree
       tree
       universal-ctags
       wget
@@ -75,8 +73,7 @@
             # openai-triton
             # openai-whisper
             # torch-bin
-            safetensors
-            # accelerate
+            accelerate
             autogen
             boto3
             huggingface-hub

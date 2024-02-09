@@ -147,7 +147,7 @@
       "podman" 
       "sha2"
       "trippy" 
-      # "openai-whisper"
+      "openai-whisper"
     ];
     taps = [ "fujiapple852/trippy" ];
   };

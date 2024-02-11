@@ -7,7 +7,7 @@
     ./dotfiles/fish.nix
     ./dotfiles/git.nix
     ./dotfiles/nvim.nix
-    ./dotfiles/alacritty.nix
+    # ./dotfiles/alacritty.nix
     ./dotfiles/tmux.nix
     ./dotfiles/kitty.nix
     ./dotfiles/lf.nix

@@ -85,10 +85,10 @@
       "HotKey" = 975890633;
       "ISD Go" = 1447072980;
       "Keynote" = 409183694;
+      "Kindle" = 302584613;
       "Meeter" = 1510445899;
       "Numbers" = 409203825;
       "Omnivore" = 1564031042;
-      "Orbot" = 1609461599;
       "Pages" = 409201541;
       "Pixelmator Pro" = 1289583905;
       "StopTheMadness Pro" = 6471380298;
@@ -127,15 +127,18 @@
       "lm-studio"
       "maccy"
       "miniconda"
+      "mullvad-browser"
       "ollama"
       "podman-desktop"
-      "postman"
       "raycast" 
       "rsyncui"
       "slack"
       "soulver"
       "soulver-cli"
+      "thunderbird"
+      "tor-browser"
       "viber"
+      "vivaldi"
       "whatsapp"
       "yubico-authenticator"
       "yubico-yubikey-manager"
@@ -143,11 +146,11 @@
       "zotero"
     ];
     brews = [ 
+      "openai-whisper"
       "p7zip"
       "podman" 
       "sha2"
       "trippy" 
-      "openai-whisper"
     ];
     taps = [ "fujiapple852/trippy" ];
   };

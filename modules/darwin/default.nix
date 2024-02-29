@@ -12,6 +12,8 @@
     };
   };
 
+  security.pam.enableSudoTouchIdAuth = true;
+
   programs = {
     zsh.enable = true;
     fish.enable = true;
@@ -97,7 +99,7 @@
       "UTM" = 1538878817;
       "Velja" = 1607635845;
       "Xcode" = 497799835;
-      "iMovie" = 408981434;
+      # "iMovie" = 408981434;
       };
     global = {
       brewfile = true;
@@ -118,15 +120,16 @@
       "drawio"
       "figma"
       "firefox"
+      "github"
       "google-chrome"
       "google-drive"
       "grammarly-desktop" 
+      "handbrake"
       "insomnia"
       "latest"
       "little-snitch"
       "lm-studio"
       "maccy"
-      "miniconda"
       "mullvad-browser"
       "ollama"
       "onyx"
@@ -148,6 +151,7 @@
       "yubico-yubikey-manager"
       "zoom"
       "zotero"
+      # "miniconda"
     ];
     brews = [ 
       "openai-whisper"
@@ -156,6 +160,9 @@
       "sha2"
       "trippy" 
     ];
-    taps = [ "fujiapple852/trippy" ];
+    taps = [ 
+      "fujiapple852/trippy"
+      "homebrew/cask"
+    ];
   };
 }

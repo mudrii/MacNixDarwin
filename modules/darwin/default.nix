@@ -128,6 +128,7 @@
       "insomnia"
       "latest"
       "little-snitch"
+      "logseq"
       "lm-studio"
       "maccy"
       "mullvad-browser"

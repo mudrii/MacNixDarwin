@@ -48,6 +48,8 @@
       gotools
       highlight
       jq
+      yq-go
+      go-task
       less
       lf
       mas
@@ -63,7 +65,6 @@
       tree
       universal-ctags
       wget
-      zig
       gnutls
       poetry
       rclone

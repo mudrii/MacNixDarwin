@@ -29,7 +29,6 @@
     };
 
     packages = with pkgs; [
-      # github-copilot-cli
       # open-interpreter
       # openai
       # openai-whisper

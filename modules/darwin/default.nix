@@ -84,6 +84,7 @@
       "Battery Monitor" = 413678017;
       "Dropover" = 1355679052;
       "Encrypto" = 935235287;
+      "Goodnotes" = 1444383602;
       "HotKey" = 975890633;
       "ISD Go" = 1447072980;
       "Keynote" = 409183694;

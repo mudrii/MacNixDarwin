@@ -50,6 +50,7 @@
       jq
       yq-go
       go-task
+      pulumi
       less
       lf
       mas

@@ -126,6 +126,7 @@
       "google-drive"
       "grammarly-desktop" 
       "handbrake"
+      "jan"
       "insomnia"
       "latest"
       "little-snitch"

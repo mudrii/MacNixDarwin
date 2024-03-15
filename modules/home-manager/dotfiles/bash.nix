@@ -27,9 +27,9 @@
         gpl = "git pull";
         gps = "git push";
         gst = "git status";
-        la = "eza -alg --group-directories-first -s=type --icons";
-        lg = "eza --long --all --group --header --git";
-        lt = "eza --long --all --group --header --tree --level ";
+        lsa = "eza -alga--group-directories-first -s=type --icons";
+        lsg = "eza --long --all --group --header --git";
+        lst = "eza --long --all --group --header --tree --level ";
         lless = "set -gx LESSOPEN '|pygmentize -f terminal256 -g -P style=monokai %s' && set -gx LESS '-R' && less -m -g -i -J -u -Q";
         vim = "nvim";
         nixsw = "darwin-rebuild switch --flake ~/src/system-config/.#";

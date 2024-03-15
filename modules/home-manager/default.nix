@@ -35,6 +35,7 @@
       # openai-whisper-cpp
       awscli2
       bitwarden-cli
+      cloudflared
       bun
       curl
       fd

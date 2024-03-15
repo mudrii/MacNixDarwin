@@ -11,7 +11,6 @@
       nil
       lua
       lua-language-server
-      rnix-lsp
       gopls
       pyright
       black

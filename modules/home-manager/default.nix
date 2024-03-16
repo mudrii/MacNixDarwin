@@ -29,10 +29,9 @@
     };
 
     packages = with pkgs; [
-      # open-interpreter
-      # openai
+      open-interpreter
       # openai-whisper
-      # openai-whisper-cpp
+      openai-whisper-cpp
       awscli2
       bitwarden-cli
       cloudflared

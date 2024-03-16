@@ -153,13 +153,22 @@
       "zoom"
       "zotero"
       # "miniconda"
-    ];
+         ];
     brews = [ 
       # "openai-whisper"
       "p7zip"
       "podman" 
       "sha2"
       "trippy" 
+     # Dependencyes
+      "libpng"
+      "libunistring"
+      "glib"
+      "xz"
+      "libnghttp2"
+      "ca-certificates"
+      "pcre2"
+      "unbound"
     ];
     taps = [ 
       "fujiapple852/trippy"

@@ -107,12 +107,10 @@
     eza.enable = true;
     htop.enable = true;
     info.enable = true;
-
-    dircolors = {
-      enable = true;
-      enableFishIntegration = true;
-      enableZshIntegration = true;
-    };
+    fzf.enable = true;
+    dircolors.enable = true;
+    zoxide.enable = true;
+    atuin.enable = true;
 
     bat = {
       enable = true;
@@ -120,16 +118,6 @@
         theme = "TwoDark";
         paging = "always";
       };
-    };
-
-    fzf = {
-      enable = true;
-      enableZshIntegration = true;
-      enableFishIntegration = true;
-    };
-
-    atuin = {
-      enable = true;
     };
 
     direnv = {

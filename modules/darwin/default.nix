@@ -1,7 +1,5 @@
 { pkgs, config, ... }:
-
-{
-  services.nix-daemon.enable = true;
+{ services.nix-daemon.enable = true;
 
   users = {
     users = {
@@ -157,7 +155,7 @@
       # "miniconda"
     ];
     brews = [ 
-      "openai-whisper"
+      # "openai-whisper"
       "p7zip"
       "podman" 
       "sha2"

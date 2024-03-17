@@ -52,6 +52,7 @@
       pulumi
       less
       lf
+      tldr
       mas
       nix-tree
       nixpkgs-fmt
@@ -105,18 +106,24 @@
     command-not-found.enable = true;
     eza.enable = true;
     htop.enable = true;
+    btop.enable = true;
     info.enable = true;
     fzf.enable = true;
     dircolors.enable = true;
     zoxide.enable = true;
     atuin.enable = true;
 
+    # zellij = {
+    #   enable = true;
+    #   enableFishIntegration = true;
+    # };
+
     bat = {
       enable = true;
       config = {
         theme = "TwoDark";
         paging = "always";
-      };
+      }; 
     };
 
     direnv = {

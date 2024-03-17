@@ -50,6 +50,7 @@
       yq-go
       go-task
       pulumi
+      lazydocker
       less
       lf
       tldr
@@ -102,16 +103,17 @@
   };
 
   programs = {
-    jq.enable = true;
-    command-not-found.enable = true;
-    eza.enable = true;
-    htop.enable = true;
-    btop.enable = true;
-    info.enable = true;
-    fzf.enable = true;
-    dircolors.enable = true;
-    zoxide.enable = true;
     atuin.enable = true;
+    btop.enable = true;
+    command-not-found.enable = true;
+    dircolors.enable = true;
+    eza.enable = true;
+    fzf.enable = true;
+    htop.enable = true;
+    info.enable = true;
+    jq.enable = true;
+    lazygit.enable = true;
+    zoxide.enable = true;
 
     # zellij = {
     #   enable = true;

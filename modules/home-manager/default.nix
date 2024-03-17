@@ -37,6 +37,7 @@
       cloudflared
       bun
       curl
+      duf
       fd
       ffmpeg
       fzf

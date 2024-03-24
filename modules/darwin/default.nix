@@ -152,10 +152,11 @@
       "yubico-yubikey-manager"
       "zoom"
       "zotero"
-      # "miniconda"
+      ## "miniconda"
          ];
     brews = [ 
       # "openai-whisper"
+      "awscli"
       "p7zip"
       "podman" 
       "sha2"

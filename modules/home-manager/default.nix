@@ -32,7 +32,7 @@
       open-interpreter
       # openai-whisper
       openai-whisper-cpp
-      awscli2
+      # awscli2
       bitwarden-cli
       cloudflared
       bun

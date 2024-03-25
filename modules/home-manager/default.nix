@@ -41,7 +41,6 @@
       fd
       ffmpeg
       fzf
-      gh
       git-lfs
       gnupg
       go
@@ -121,6 +120,26 @@
     #   enableFishIntegration = true;
     # };
 
+    gh = {
+      enable = true;
+      extensions = with pkgs; [ 
+        gh-copilot 
+        gh-markdown-preview
+      ];
+      settings = {
+        git_protocol = "ssh";
+
+        prompt = "enabled";
+
+        aliases = {
+          pch = "pr checkout";
+          pvw = "pr view";
+          coe = "copilot explain";
+          cos = "copilot suggest";
+        };
+      };
+    };
+
     bat = {
       enable = true;
       config = {
@@ -128,7 +147,7 @@
         paging = "always";
       }; 
     };
-
+ 
     direnv = {
       enable = true;
       nix-direnv = {

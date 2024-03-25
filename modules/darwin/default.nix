@@ -109,6 +109,7 @@
       cleanup = "uninstall";
       };
     casks = [ 
+      "adobe-acrobat-reader"
       "amethyst" 
       "arc"
       "authy"

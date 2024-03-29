@@ -38,6 +38,7 @@
       bun
       curl
       duf
+      thefuck
       fd
       ffmpeg
       fzf
@@ -46,6 +47,7 @@
       go
       gotools
       highlight
+      httpie
       jq
       yq-go
       go-task

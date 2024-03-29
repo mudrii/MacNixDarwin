@@ -109,7 +109,7 @@
       cleanup = "uninstall";
       };
     casks = [ 
-      "adobe-acrobat-reader"
+      # "adobe-acrobat-reade"
       "amethyst" 
       "arc"
       "authy"
@@ -135,6 +135,7 @@
       "mullvad-browser"
       "ollama"
       "onyx"
+      "permute"
       "podman-desktop"
       "raycast" 
       "rsyncui"
@@ -151,6 +152,7 @@
       "whatsapp"
       "yubico-authenticator"
       "yubico-yubikey-manager"
+      "zed"
       "zoom"
       "zotero"
       ## "miniconda"
@@ -162,7 +164,6 @@
       "podman" 
       "sha2"
       "trippy" 
-     # Dependencyes
       "libpng"
       "libunistring"
       "glib"

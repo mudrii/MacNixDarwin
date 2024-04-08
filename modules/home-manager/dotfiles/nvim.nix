@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, ... }: {
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -21,154 +21,154 @@
     extraLuaConfig = ''
       -- remap nvim convenience functions
       local g = vim.g
-      local o = vim.opt
-      local c = vim.cmd
-      local a = vim.api
-      local k = vim.keymap.set
+      local opt = vim.opt
+      local cmd = vim.cmd
+      local api = vim.api
+      local kmap = vim.keymap.set
       local ons = { noremap = true, silent = true }
       
       -- leader key configuration
       g.mapleader = " "
       g.maplocalleader = ' '
-      k("", "<Space>", "<Nop>", ons)
+      kmap("", "<Space>", "<Nop>", ons)
 
       -- tab & indentation
-      o.tabstop = 2
-      o.shiftwidth = 2
-      o.softtabstop = 2
-      o.expandtab = true
-      -- o.smarttab = true
-      o.smartindent = true
-      -- o.autoindent = true
-      -- o.cpoptions = 'I'
-      -- o.breakindent = true
+      opt.tabstop = 2
+      opt.shiftwidth = 2
+      opt.softtabstop = 2
+      opt.expandtab = true
+      -- opt.smarttab = true
+      opt.smartindent = true
+      -- opt.autoindent = true
+      -- opt.cpoptions = 'I'
+      -- opt.breakindent = true
 
       -- disable swap files
-      o.swapfile = false
-      o.backup = false
+      opt.swapfile = false
+      opt.backup = false
 
       -- undo settings
-      o.undofile = true
-      o.undodir = os.getenv("HOME") .. "/.vim/undodir"
+      opt.undofile = true
+      opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
       -- wrap lines
-      o.wrap = false
-      o.linebreak = true
+      opt.wrap = false
+      opt.linebreak = true
 
       -- fold settings
-      o.foldmethod = "syntax"
-      o.foldlevel = 1
-      o.foldnestmax = 10
-      o.foldenable = false
-      o.foldcolumn = "1"
+      opt.foldmethod = "syntax"
+      opt.foldlevel = 1
+      opt.foldnestmax = 10
+      opt.foldenable = false
+      opt.foldcolumn = "1"
 
       -- file format and encodinf UTF-8
-      o.fileencoding = "utf-8"
-      o.fileformats = unix
+      opt.fileencoding = "utf-8"
+      opt.fileformats = unix
 
       -- auto reload files changed outside of vim
-      o.autoread = true
+      opt.autoread = true
 
       -- display relative line number
-      o.number = true
-      o.relativenumber = true
+      opt.number = true
+      opt.relativenumber = true
 
       -- search settings
-      o.smartcase = true
-      o.ignorecase = true
-      o.hlsearch = false
-      o.incsearch = true
+      opt.smartcase = true
+      opt.ignorecase = true
+      opt.hlsearch = false
+      opt.incsearch = true
 
       -- appearance
-      o.termguicolors = true
-      o.mouse = "a"
-      o.mousehide = true
-      o.signcolumn = "yes"
-      o.guicursor = ""
-      o.scrolloff = 8
-      o.sidescrolloff = 8
-      -- vim.opt.colorcolumn = "80"
-      o.updatetime = 300
-      o.timeout = true
-      o.timeoutlen = 300
-      o.cursorline = true
-      o.showmatch = true
-      o.backspace = 'indent,eol,start'
+      opt.termguicolors = true
+      opt.mouse = "a"
+      opt.mousehide = true
+      opt.signcolumn = "yes"
+      opt.guicursor = ""
+      opt.scrolloff = 8
+      opt.sidescrolloff = 8
+      -- opt.colorcolumn = "80"
+      opt.updatetime = 300
+      opt.timeout = true
+      opt.timeoutlen = 300
+      opt.cursorline = true
+      opt.showmatch = true
+      opt.backspace = 'indent,eol,start'
 
       -- split windows below and to the right
-      o.splitbelow = true
-      o.splitright = true
+      opt.splitbelow = true
+      opt.splitright = true
       
       -- Spell checking
-      o.spelllang = "en_us"
+      opt.spelllang = "en_us"
 
       -- key mappings
-      -- k("n", "<leader>pv", vim.cmd.Ex)
-      k("n", "<leader>q", vim.cmd.quit)
-      k("n", "<leader>w", vim.cmd.write)
+      -- kmap("n", "<leader>pv", vim.cmd.Ex)
+      kmap("n", "<leader>q", vim.cmd.quit)
+      kmap("n", "<leader>w", vim.cmd.write)
 
       -- move lines
-      k("v", "J", ":m '>+1<CR>gv=gv", ons)
-      k("v", "K", ":m '<-2<CR>gv=gv", ons)
+      kmap("v", "J", ":m '>+1<CR>gv=gv", ons)
+      kmap("v", "K", ":m '<-2<CR>gv=gv", ons)
 
       -- join lines without inserting a space
-      vim.keymap.set("n", "J", "mzJ`z", ons)
+      kmap("n", "J", "mzJ`z", ons)
 
       -- paste over the current selection
-      k("x", "<leader>p", [["_dP]], ons)
+      kmap("x", "<leader>p", [["_dP]], ons)
 
       -- copy/cut to the system clipboard
-      k({"n", "v"}, "<leader>y", [["+y]], ons)
-      k({"n", "v"}, "<leader>d", [["_d]], ons)
-      k("n", "<leader>Y", [["+Y]], ons)
-      o.clipboard = 'unnamedplus'
+      kmap({"n", "v"}, "<leader>y", [["+y]], ons)
+      kmap({"n", "v"}, "<leader>d", [["_d]], ons)
+      kmap("n", "<leader>Y", [["+Y]], ons)
+      opt.clipboard = 'unnamedplus'
 
       -- press jk/kj fast to exit insert mode 
-      k("i", "jk", "<ESC>", ons)
-      k("i", "kj", "<ESC>", ons)
+      kmap("i", "jk", "<ESC>", ons)
+      kmap("i", "kj", "<ESC>", ons)
 
       -- move windows with Ctrl + hjkl keys
-      k("n", "<C-h>", "<C-w>h", ons)
-      k("n", "<C-j>", "<C-w>j", ons)
-      k("n", "<C-k>", "<C-w>k", ons)
-      k("n", "<C-l>", "<C-w>l", ons)
+      kmap("n", "<C-h>", "<C-w>h", ons)
+      kmap("n", "<C-j>", "<C-w>j", ons)
+      kmap("n", "<C-k>", "<C-w>k", ons)
+      kmap("n", "<C-l>", "<C-w>l", ons)
       
       -- split windows horizontally and vertically
-      k("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
-      k("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
+      kmap("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
+      kmap("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
       
-      k("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
-      k("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
+      kmap("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
+      kmap("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
        
       -- navigate buffers
-      k("n", "<S-l>", ":bnext<CR>", ons)
-      k("n", "<S-h>", ":bprevious<CR>", ons)
+      kmap("n", "<S-l>", ":bnext<CR>", ons)
+      kmap("n", "<S-h>", ":bprevious<CR>", ons)
 
       -- resize with arrows
-      k("n", "<C-Up>", ":resize -2<CR>", ons)
-      k("n", "<C-Down>", ":resize +2<CR>", ons)
-      k("n", "<C-Left>", ":vertical resize -2<CR>", ons)
-      k("n", "<C-Right>", ":vertical resize +2<CR>", ons)
+      kmap("n", "<C-Up>", ":resize -2<CR>", ons)
+      kmap("n", "<C-Down>", ":resize +2<CR>", ons)
+      kmap("n", "<C-Left>", ":vertical resize -2<CR>", ons)
+      kmap("n", "<C-Right>", ":vertical resize +2<CR>", ons)
 
       -- scroll up/down half a page
-      k("n", "<C-d>", "<C-d>zz")
-      k("n", "<C-u>", "<C-u>zz")
+      kmap("n", "<C-d>", "<C-d>zz")
+      kmap("n", "<C-u>", "<C-u>zz")
 
       -- center the cursor when searching
-      k("n", "n", "nzzzv")
-      k("n", "N", "Nzzzv")
+      kmap("n", "n", "nzzzv")
+      kmap("n", "N", "Nzzzv")
 
       -- disable the Exit mode
-      k("n", "Q", "<nop>", ons)
+      kmap("n", "Q", "<nop>", ons)
 
       -- replace the current word with the word under the cursor
-      k("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+      kmap("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
       -- make the current file executable
-      k("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+      kmap("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
       -- vim api mappings
-      a.nvim_set_keymap('n', "<M-s>", ':so $MYVIMRC<CR>', {noremap = true, silent = true})
+      api.nvim_set_keymap('n', "<M-s>", ':so $MYVIMRC<CR>', ons)
       '';
     plugins = with pkgs.vimPlugins; [
       {
@@ -229,9 +229,9 @@
       #         })
       #     function ColorMyPencils(color)
       #       color = color or "rose-pine"
-      #       c.colorscheme(color)
-      #       vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-      #       vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+      #       cmd.colorscheme(color)
+      #       api.nvim_set_hl(0, "Normal", { bg = "none" })
+      #       api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
       #     end
       #     ColorMyPencils()
       #   '';
@@ -240,7 +240,7 @@
       #   plugin = catppuccin-nvim;
       #   type = "lua";
       #   config = ''
-      #     c.colorscheme "catppuccin-macchiato"  -- colorscheme latte, frappe, macchiato, mocha
+      #     cmd.colorscheme "catppuccin-macchiato"  -- colorscheme latte, frappe, macchiato, mocha
       #
       #   '';
       # }
@@ -248,7 +248,7 @@
         plugin = tokyonight-nvim;
         type = "lua";
         config = ''
-          c.colorscheme "tokyonight-storm"  -- colorscheme storm, night, day, moon.
+          cmd.colorscheme "tokyonight-storm"  -- colorscheme storm, night, day, moon.
         '';
       }
       {
@@ -270,14 +270,14 @@
       	plugin = undotree;
       	type = "lua";
       	config = ''
-          k("n", "<leader>u", vim.cmd.UndotreeToggle)
+          kmap("n", "<leader>u", vim.cmd.UndotreeToggle)
       	'';
       }
       {
       	plugin = vim-fugitive;
       	type = "lua";
       	config =''
-          k("n", "<leader>gs", vim.cmd.Git)
+          kmap("n", "<leader>gs", vim.cmd.Git)
       	'';
       }	
       {
@@ -285,7 +285,7 @@
         type = "lua";
         config =''
           require("nvim-tree").setup()
-          k("n", "<leader>tr", ":NvimTreeToggle<CR>")
+          kmap("n", "<leader>tr", ":NvimTreeToggle<CR>")
           g.loaded_netrw = 1
           g.loaded_netrwPlugin = 1
           '';
@@ -295,10 +295,10 @@
       	type = "lua";
       	config = ''
       	  require('telescope').setup()
-      	  k("n", "<leader>ff", ":Telescope find_files<CR>")
-      	  k("n", "<leader>fg", ":Telescope live_grep<CR>")
-      	  k("n", "<leader>fb", ":Telescope buffers<CR>")
-      	  k("n", "<leader>fh", ":Telescope help_tags<CR>")
+      	  kmap("n", "<leader>ff", ":Telescope find_files<CR>")
+      	  kmap("n", "<leader>fg", ":Telescope live_grep<CR>")
+      	  kmap("n", "<leader>fb", ":Telescope buffers<CR>")
+      	  kmap("n", "<leader>fh", ":Telescope help_tags<CR>")
     	  '';
       }
       {
@@ -307,14 +307,14 @@
       	config = ''
       	  local harpoon = require("harpoon")
           harpoon:setup()
-      	  k("n", "<leader>ha", function() harpoon:list():append() end)
-      	  k("n", "<leader>he", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-      	  k("n", "<leader>hh", function() harpoon:list():select(1) end)
-      	  k("n", "<leader>hj", function() harpoon:list():select(2) end)
-      	  k("n", "<leader>hk", function() harpoon:list():select(3) end)
-      	  k("n", "<leader>hl", function() harpoon:list():select(4) end)
-      	  k("n", "<leader>hp", function() harpoon:list():prev() end)
-      	  k("n", "<leader>hn", function() harpoon:list():next() end)
+      	  kmap("n", "<leader>ha", function() harpoon:list():append() end)
+      	  kmap("n", "<leader>he", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+      	  kmap("n", "<leader>hh", function() harpoon:list():select(1) end)
+      	  kmap("n", "<leader>hj", function() harpoon:list():select(2) end)
+      	  kmap("n", "<leader>hk", function() harpoon:list():select(3) end)
+      	  kmap("n", "<leader>hl", function() harpoon:list():select(4) end)
+      	  kmap("n", "<leader>hp", function() harpoon:list():prev() end)
+      	  kmap("n", "<leader>hn", function() harpoon:list():next() end)
     	  '';
       }
       {
@@ -347,23 +347,24 @@
         '';
       }
       {
+        plugin = cmp-spell;
+        type = "lua";
+        config = ''
+          opt.spell = true
+          opt.spelllang = { 'en_us' }
+          '';
+      }
+      {
         plugin = copilot-lua;
         type = "lua";
         config = ''
           require("copilot").setup({
+            -- copilot_node_command = '${lib.getExe pkgs.nodejs}',
             panel = { enabled = false },
-            suggestion = { enabled = true },
-            -- suggestion = { enabled = false },
+            suggestion = { enabled = false },
+            snippet = { enabled = true },
           })
         ''; 
-      }
-      {
-        plugin = cmp-spell;
-        type = "lua";
-        config = ''
-          o.spell = true
-          o.spelllang = { 'en_us' }
-        '';
       }
       {
         plugin = nvim-lspconfig;
@@ -381,10 +382,10 @@
             capabilities = capabilities
           })
 
-          k("n", "K", vim.lsp.buf.hover, {})
-          k("n", "<leader>gd", vim.lsp.buf.definition, {})
-          k("n", "<leader>gr", vim.lsp.buf.references, {})
-          k("n", "<leader>ca", vim.lsp.buf.code_action, {})
+          kmap("n", "K", vim.lsp.buf.hover, {})
+          kmap("n", "<leader>gd", vim.lsp.buf.definition, {})
+          kmap("n", "<leader>gr", vim.lsp.buf.references, {})
+          kmap("n", "<leader>ca", vim.lsp.buf.code_action, {})
 
         '';
       }

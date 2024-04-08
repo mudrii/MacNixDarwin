@@ -294,27 +294,27 @@
       	plugin = telescope-nvim;
       	type = "lua";
       	config = ''
-      	  require('telescope').setup()
-      	  kmap("n", "<leader>ff", ":Telescope find_files<CR>")
-      	  kmap("n", "<leader>fg", ":Telescope live_grep<CR>")
-      	  kmap("n", "<leader>fb", ":Telescope buffers<CR>")
-      	  kmap("n", "<leader>fh", ":Telescope help_tags<CR>")
+          local builtin = require('telescope.builtin')
+          kmap('n', '<leader>ff', builtin.find_files, {})
+          kmap('n', '<leader>fg', builtin.live_grep, {})
+          kmap('n', '<leader>fb', builtin.buffers, {})
+          kmap('n', '<leader>fh', builtin.help_tags, {})
     	  '';
       }
       {
       	plugin = harpoon2;
       	type = "lua";
       	config = ''
-      	  local harpoon = require("harpoon")
+          local harpoon = require("harpoon")
           harpoon:setup()
-      	  kmap("n", "<leader>ha", function() harpoon:list():append() end)
-      	  kmap("n", "<leader>he", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
-      	  kmap("n", "<leader>hh", function() harpoon:list():select(1) end)
-      	  kmap("n", "<leader>hj", function() harpoon:list():select(2) end)
-      	  kmap("n", "<leader>hk", function() harpoon:list():select(3) end)
-      	  kmap("n", "<leader>hl", function() harpoon:list():select(4) end)
-      	  kmap("n", "<leader>hp", function() harpoon:list():prev() end)
-      	  kmap("n", "<leader>hn", function() harpoon:list():next() end)
+          kmap("n", "<leader>ha", function() harpoon:list():add() end)
+          kmap("n", "<leader>he", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+          kmap("n", "<leader>h1", function() harpoon:list():select(1) end)
+          kmap("n", "<leader>h2", function() harpoon:list():select(2) end)
+          kmap("n", "<leader>h3", function() harpoon:list():select(3) end)
+          kmap("n", "<leader>h4", function() harpoon:list():select(4) end)
+          kmap("n", "<leader>hp", function() harpoon:list():prev() end)
+          kmap("n", "<leader>hn", function() harpoon:list():next() end)
     	  '';
       }
       {

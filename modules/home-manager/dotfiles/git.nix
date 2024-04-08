@@ -9,7 +9,7 @@
     ignores = [ "*~" "*.swp" ".DS_Store" "._.DS_Store" "**/.DS_Store" "**/._.DS_Store" ];
 /*
     signing = {
-      key = "C37CEF50333B225E2FCA7D2003B8C6E70C3ED787";
+      key = null; # Let GPG decide
       signByDefault = true;
     };
 */
@@ -34,12 +34,32 @@
       pp = "!git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)";
       recent-branches = "branch --sort=-committerdate";
     };
-      extraConfig = {
-        branch = { autoSetupMerge = "always"; };
-        stash = { showPatch = true; };
-        status = { showUntrackedFiles = "all"; };
-        transfer = { fsckobjects = false; };
-        # commit = { gpgsign = true; };
+    
+    extraConfig = {
+      credential = { helper = "store"; };
+      # credential."https://github.com" = {
+      #   #helper = "!${pkgs.gh}/bin/gh auth git-credential";
+      #   helper = "!/run/current-system/sw/bin/gh auth git-credential";
+      # };
+
+      init = { defaultBranch = "main"; };
+      pull = { rebase = true; }; # Rebase by default when pulling
+      push = { default = "current"; }; # Push to a remote branch with the same name
+      fetch = { prune = true; }; # Prune remote branches when fetching
+      diff = { algorithm = "histogram"; }; # "Better" diff algorithm
+      stash = { showPatch = true; };
+      status = { showUntrackedFiles = "all"; };
+      transfer = { fsckobjects = false; };
+
+      branch = { 
+        autoSetupMerge = "always"; 
+        sort = "-committerdate"; # Sort branches by last commit date 
+        };
+
+      commit = { 
+        verbose = true; # Show the diff when committing
+        # gpgsign = true; 
+      };
 
       core = {
         # pager = "less -R";
@@ -47,13 +67,8 @@
         editor = "nvim";
       };
 
-      # credential."https://github.com" = {
-      #   #helper = "!${pkgs.gh}/bin/gh auth git-credential";
-      #   helper = "!/run/current-system/sw/bin/gh auth git-credential";
-      #   };
-
       merge = {
-        conflictstyle = "diff3";
+        conflictstyle = "zdiff3"; # Also show the common ancestor
         ff = "only";
         summary = true;
         tool = "vimdiff";
@@ -72,13 +87,9 @@
         ];
       };
 
-      pull = {
-        rebase = true;
-      };
-
       rebase = {
         stat = true;
-        autoSquash = true;
+        autoSquash = true; # Stash changes before rebasing
         autostash = true;
       };
     };

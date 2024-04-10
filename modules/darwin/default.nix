@@ -86,7 +86,6 @@
       "HotKey" = 975890633;
       "ISD Go" = 1447072980;
       "Keynote" = 409183694;
-      "Kindle" = 302584613;
       "Meeter" = 1510445899;
       "Numbers" = 409203825;
       "Omnivore" = 1564031042;
@@ -135,6 +134,7 @@
       "mullvad-browser"
       "ollama"
       "onyx"
+      "kindle"
       "permute"
       "podman-desktop"
       "raycast" 

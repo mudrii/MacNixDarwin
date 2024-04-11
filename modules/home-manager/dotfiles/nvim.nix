@@ -213,6 +213,7 @@
       cmp-nvim-lua # A Lua source for nvim-cmp
       luasnip # A snippet engine for Neovim
       friendly-snippets # A collection of snippets for LuaSnip
+      trouble-nvim # A plugin for managing Neovim's diagnostics 
       {
         plugin = nvim-web-devicons;
         type = "lua";
@@ -278,6 +279,8 @@
       	type = "lua";
       	config =''
           kmap("n", "<leader>gs", vim.cmd.Git)
+          kmap("n", "<leader>gc", ":Git commit<CR>")
+          kmap("n", "<leader>gp", ":Git push<CR>")
       	'';
       }	
       {
@@ -307,14 +310,14 @@
       	config = ''
           local harpoon = require("harpoon")
           harpoon:setup()
-          kmap("n", "<leader>ha", function() harpoon:list():add() end)
+          kmap("n", "<leader>ha", function() harpoon:list():append() end)
           kmap("n", "<leader>he", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
           kmap("n", "<leader>h1", function() harpoon:list():select(1) end)
           kmap("n", "<leader>h2", function() harpoon:list():select(2) end)
           kmap("n", "<leader>h3", function() harpoon:list():select(3) end)
           kmap("n", "<leader>h4", function() harpoon:list():select(4) end)
-          kmap("n", "<leader>hp", function() harpoon:list():prev() end)
-          kmap("n", "<leader>hn", function() harpoon:list():next() end)
+          kmap("n", "<leader>h,", function() harpoon:list():prev() end)
+          kmap("n", "<leader>h.", function() harpoon:list():next() end)
     	  '';
       }
       {

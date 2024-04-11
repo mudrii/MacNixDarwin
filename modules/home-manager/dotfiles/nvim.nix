@@ -279,7 +279,7 @@
       	type = "lua";
       	config =''
           kmap("n", "<leader>gs", vim.cmd.Git)
-          kmap("n", "<leader>gc", ":Git commit<CR>")
+          -- kmap("n", "<leader>gc", ":Git commit<CR>")
           kmap("n", "<leader>gp", ":Git push<CR>")
       	'';
       }	

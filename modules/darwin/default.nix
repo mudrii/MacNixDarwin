@@ -162,16 +162,7 @@
       "awscli"
       "p7zip"
       "podman" 
-      "sha2"
-      "trippy" 
-      "libpng"
-      "libunistring"
-      "glib"
-      "xz"
-      "libnghttp2"
-      "ca-certificates"
-      "pcre2"
-      "unbound"
+      "wireguard-go"
     ];
     taps = [ 
       "fujiapple852/trippy"

@@ -13,39 +13,37 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs@{ nixpkgs, home-manager, darwin, ... }: {
-    darwinConfigurations.mudrii16 =
-      darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          ./modules/darwin
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.mudrii.imports = [
-                ./modules/home-manager
-              ];
-            };
-          }
-        ];
-      };
-    darwinConfigurations.mudrii14 =
-      darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          ./modules/darwin
-          home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.mudrii.imports = [
-                ./modules/home-manager
-              ];
-            };
-          }
-        ];
-      };
+    darwinConfigurations.mudrii16 = darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      modules = [
+        ./modules/darwin
+        home-manager.darwinModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.mudrii.imports = [
+              ./modules/home-manager
+            ];
+          };
+        }
+      ];
+    };
+    darwinConfigurations.mudrii14 = darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      modules = [
+        ./modules/darwin
+        home-manager.darwinModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.mudrii.imports = [
+              ./modules/home-manager
+            ];
+          };
+        }
+      ];
+    };
   };
 }

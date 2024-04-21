@@ -17,6 +17,7 @@
       pylint
       nodePackages.typescript
       nodePackages.typescript-language-server
+      tree-sitter
     ];
     extraLuaConfig = ''
       -- remap nvim convenience functions
@@ -172,6 +173,18 @@
       '';
     plugins = with pkgs.vimPlugins; [
       {
+        plugin = nvim-treesitter;
+        type = "lua";
+        config = ''
+          require'nvim-treesitter.configs'.setup {
+            ensure_installed = {},
+            auto_install = false,
+            highlight = { enable = true },
+            indent = { enable = true },
+          }
+        '';
+      }
+      {
         plugin = (nvim-treesitter.withPlugins (p: [
           p.tree-sitter-nix
           p.tree-sitter-vim
@@ -283,6 +296,14 @@
       	'';
       }	
       {
+        plugin = oil-nvim;
+        type = "lua";
+        config = ''
+          require("oil").setup()
+          kmap ("n", "-", require("oil").open, {desc = "Open parent directory"} )
+        '';
+      }
+      {
         plugin = nvim-tree-lua;
         type = "lua";
         config =''
@@ -318,18 +339,6 @@
           kmap("n", "<leader>h,", function() harpoon:list():prev() end)
           kmap("n", "<leader>h.", function() harpoon:list():next() end)
     	  '';
-      }
-      {
-       	plugin = nvim-treesitter;
-      	type = "lua";
-      	config = ''
-    	    require'nvim-treesitter.configs'.setup {
-            ensure_installed = {},
-      	    auto_install = false,
-      	    highlight = { enable = true },
-    	      indent = { enable = true },
-    	    }
-	      '';
       }
       {
         plugin = which-key-nvim;

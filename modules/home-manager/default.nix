@@ -70,7 +70,7 @@
       universal-ctags
       wget
       gnutls
-      poetry
+      # poetry
       rclone
       (
         python3.withPackages (

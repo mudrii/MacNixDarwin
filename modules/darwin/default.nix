@@ -97,6 +97,7 @@
       "UTM" = 1538878817;
       "Velja" = 1607635845;
       "Xcode" = 497799835;
+      "WeChat" = 836500024;
       # "iMovie" = 408981434;
       };
     global = {
@@ -108,7 +109,6 @@
       cleanup = "uninstall";
       };
     casks = [ 
-      # "adobe-acrobat-reade"
       "amethyst" 
       "arc"
       "authy"
@@ -124,17 +124,17 @@
       "google-drive"
       "grammarly-desktop" 
       "handbrake"
-      "jan"
       "insomnia"
+      "jan"
+      "kindle"
       "latest"
       "little-snitch"
-      "logseq"
       "lm-studio"
+      "logseq"
       "maccy"
       "mullvad-browser"
       "ollama"
       "onyx"
-      "kindle"
       "permute"
       "podman-desktop"
       "raycast" 
@@ -144,7 +144,6 @@
       "soulver-cli"
       "spotify"
       "sublime-text"
-      "tempbox"
       "thunderbird"
       "tor-browser"
       "viber"
@@ -152,9 +151,9 @@
       "whatsapp"
       "yubico-authenticator"
       "yubico-yubikey-manager"
-      "zed"
       "zoom"
       "zotero"
+      # "tempbox"
       ## "miniconda"
          ];
     brews = [ 

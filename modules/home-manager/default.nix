@@ -32,7 +32,6 @@
       open-interpreter
       # openai-whisper
       openai-whisper-cpp
-      # awscli2
       bitwarden-cli
       cloudflared
       bun
@@ -43,6 +42,7 @@
       ffmpeg
       fzf
       git-lfs
+      git-secrets
       gnupg
       go
       gotools
@@ -61,8 +61,6 @@
       nixpkgs-fmt
       nodejs
       nushell
-      ocaml
-      ollama
       parallel
       pv
       ripgrep
@@ -70,7 +68,7 @@
       universal-ctags
       wget
       gnutls
-      # poetry
+      poetry
       rclone
       (
         python3.withPackages (

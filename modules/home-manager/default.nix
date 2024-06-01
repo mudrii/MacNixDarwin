@@ -29,53 +29,52 @@
     };
 
     packages = with pkgs; [
-      open-interpreter
       # openai-whisper
-      openai-whisper-cpp
-      bitwarden-cli
-      cloudflared
       bun
+      cloudflared
       curl
       duf
-      thefuck
       fd
       ffmpeg
       fzf
       git-lfs
       git-secrets
       gnupg
+      gnutls
       go
+      go-task
       gotools
       highlight
       httpie
       jq
-      yq-go
-      go-task
-      pulumi
       lazydocker
       less
       lf
-      tldr
       mas
       nix-tree
       nixpkgs-fmt
       nodejs
       nushell
+      open-interpreter
+      openai-whisper-cpp
       parallel
+      poetry
+      pulumi
       pv
+      rclone
       ripgrep
+      thefuck
+      tldr
       tree
       universal-ctags
       wget
-      gnutls
-      poetry
-      rclone
+      yq-go
       (
         python3.withPackages (
           ps: with ps; [
-            # langchain
+            langchain
             # openai-triton
-            # openai-whisper
+            openai-whisper
             # torch-bin
             accelerate
             autogen
@@ -90,6 +89,7 @@
             pipx
             poetry-core
             pygments
+            setuptools
             tiktoken
             torch
             torchaudio

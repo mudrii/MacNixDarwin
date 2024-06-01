@@ -101,7 +101,6 @@
       # "iMovie" = 408981434;
       };
     global = {
-      brewfile = true;
       autoUpdate = true;
     };
     onActivation = {

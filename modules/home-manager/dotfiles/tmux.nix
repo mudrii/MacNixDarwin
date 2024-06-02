@@ -72,7 +72,11 @@
         bind = split-window -h
         bind - split-window -v
 
+        # Ctrl+a Ctrl+f action that allows you to switch between tmux sessions.
         bind C-f command-prompt -p find-session 'switch-client -t %%'
+        
+        # Ctrl+a Ctrl+l, tmux will send the Ctrl+L key sequence to the terminal, clear the screen, and repaint the command line.
+        bind-key -n C-l send-keys C-l \; send-keys "clear && commandline -f repaint"
 
         # Vim style Movement commands
         bind h select-pane -L

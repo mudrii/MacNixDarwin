@@ -110,6 +110,7 @@
     casks = [ 
       "amethyst" 
       "arc"
+      "audacity"
       "authy"
       "bartender"
       "bitwarden"

@@ -72,7 +72,6 @@
       (
         python3.withPackages (
           ps: with ps; [
-            langchain
             # openai-triton
             openai-whisper
             # torch-bin
@@ -96,6 +95,15 @@
             torchvision
             transformers
             xstatic-pygments
+            opencv4
+            langchain
+            #langchain-openai
+            #langchain_google_genai
+            #langchain-community
+            #python-dotenv
+            #pyaudio
+            #soundfile
+            #SpeechRecognition
           ]
         )
       )

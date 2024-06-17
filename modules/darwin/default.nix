@@ -49,14 +49,13 @@
   };
 
   fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       powerline-fonts
 #      nerdfonts
       (nerdfonts.override { fonts = [ "Meslo" ]; })
     ];
   };
-
+ 
   system.defaults = {
     dock.autohide = true;
 

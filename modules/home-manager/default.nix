@@ -1,5 +1,14 @@
 { pkgs, config, ... }:
 
+# let
+#   customOverlay = import ./overlay/gollama.nix;
+#   pkgsWithOverlay = import <nixpkgs> { overlays = [ customOverlay ]; };
+# in
+
+let
+  gollama = pkgs.callPackage ./gollama.nix {};
+in
+
 {
   imports = [
     ./dotfiles/bash.nix
@@ -28,8 +37,11 @@
       TERM = "xterm-256color";
     };
 
+    # nixpkgs.overlays = [ customOverlay ];
+
     packages = with pkgs; [
       # openai-whisper
+      # open-webui
       bun
       cloudflared
       curl
@@ -39,6 +51,7 @@
       fzf
       git-lfs
       git-secrets
+      gollama
       gnupg
       gnutls
       go
@@ -73,16 +86,21 @@
         python3.withPackages (
           ps: with ps; [
             # openai-triton
-            openai-whisper
             # torch-bin
             accelerate
             autogen
             boto3
             huggingface-hub
+            ipympl
             ipython
             jupyter
+            langchain
+            matplotlib
             numpy
+            ollama
             openai
+            openai-whisper
+            opencv4
             pandas
             pip
             pipx
@@ -95,18 +113,12 @@
             torchvision
             transformers
             xstatic-pygments
-            opencv4
-            langchain
-            #langchain-openai
-            #langchain_google_genai
-            #langchain-community
-            #python-dotenv
-            #pyaudio
-            #soundfile
-            #SpeechRecognition
           ]
         )
       )
+    # ] ++ (with pkgsWithOverlay; [
+    #     gollama
+    #     ]);
     ];
   };
 

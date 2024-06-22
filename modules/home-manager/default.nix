@@ -1,13 +1,8 @@
 { pkgs, config, ... }:
 
 # let
-#   customOverlay = import ./overlay/gollama.nix;
-#   pkgsWithOverlay = import <nixpkgs> { overlays = [ customOverlay ]; };
+#   gollama = pkgs.callPackage ./overlay/gollama.nix {};
 # in
-
-let
-  gollama = pkgs.callPackage ./overlays/gollama.nix {};
-in
 
 {
   imports = [
@@ -37,7 +32,7 @@ in
       TERM = "xterm-256color";
     };
 
-    # nixpkgs.overlays = [ customOverlay ];
+    nixpkgs.overlays = [ (import ./overlay/overlay.nix) ];
 
     packages = with pkgs; [
       # openai-whisper
@@ -51,10 +46,10 @@ in
       fzf
       git-lfs
       git-secrets
-      gollama
       gnupg
       gnutls
       go
+      gollama
       go-task
       gotools
       highlight
@@ -116,9 +111,6 @@ in
           ]
         )
       )
-    # ] ++ (with pkgsWithOverlay; [
-    #     gollama
-    #     ]);
     ];
   };
 

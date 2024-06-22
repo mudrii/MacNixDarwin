@@ -6,7 +6,7 @@
 # in
 
 let
-  gollama = pkgs.callPackage ./gollama.nix {};
+  gollama = pkgs.callPackage ./overlays/gollama.nix {};
 in
 
 {

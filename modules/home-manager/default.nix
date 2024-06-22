@@ -1,8 +1,8 @@
 { pkgs, config, ... }:
 
-# let
-#   gollama = pkgs.callPackage ./overlay/gollama.nix {};
-# in
+let
+  gollama = pkgs.callPackage ./overlay/gollama.nix {};
+in
 
 {
   imports = [
@@ -31,8 +31,6 @@
       # MANPAGER = "nvim -c 'set ft=man' -";
       TERM = "xterm-256color";
     };
-
-    nixpkgs.overlays = [ (import ./overlay/overlay.nix) ];
 
     packages = with pkgs; [
       # openai-whisper

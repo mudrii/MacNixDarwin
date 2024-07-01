@@ -86,6 +86,7 @@
       "ISD Go" = 1447072980;
       "Keynote" = 409183694;
       "Meeter" = 1510445899;
+      "NextDNS" = 1464122853;
       "Numbers" = 409203825;
       "Omnivore" = 1564031042;
       "Pages" = 409201541;
@@ -166,6 +167,7 @@
     brews = [ 
       # "openai-whisper"
       "awscli"
+      "nextdns"
       "p7zip"
       "podman" 
       "wireguard-go"

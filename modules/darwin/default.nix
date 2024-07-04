@@ -165,12 +165,12 @@
       ## "miniconda"
          ];
     brews = [ 
-      # "openai-whisper"
       "awscli"
-      "nextdns"
       "p7zip"
       "podman" 
-      "wireguard-go"
+      # "nextdns"
+      # "openai-whisper"
+      # "wireguard-go"
     ];
     taps = [ 
       "fujiapple852/trippy"

@@ -41,7 +41,6 @@ in
       duf
       fd
       ffmpeg
-      fzf
       git-lfs
       git-secrets
       gnupg
@@ -52,7 +51,6 @@ in
       gotools
       highlight
       httpie
-      jq
       lazydocker
       less
       lf
@@ -70,7 +68,7 @@ in
       rclone
       ripgrep
       thefuck
-      tldr
+      tlrc
       tree
       universal-ctags
       wget
@@ -117,8 +115,6 @@ in
     btop.enable = true;
     command-not-found.enable = true;
     dircolors.enable = true;
-    eza.enable = true;
-    fzf.enable = true;
     htop.enable = true;
     info.enable = true;
     jq.enable = true;
@@ -130,24 +126,13 @@ in
     #   enableFishIntegration = true;
     # };
 
-    gh = {
+    eza = {
       enable = true;
-      extensions = with pkgs; [ 
-        gh-copilot 
-        gh-markdown-preview
-      ];
-      settings = {
-        git_protocol = "ssh";
+      git = true;
+    };
 
-        prompt = "enabled";
-
-        aliases = {
-          pch = "pr checkout";
-          pvw = "pr view";
-          coe = "copilot explain";
-          cos = "copilot suggest";
-        };
-      };
+    fzf = {
+      enable = true;
     };
 
     bat = {

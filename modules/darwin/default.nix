@@ -1,6 +1,7 @@
-{ pkgs, config, ... }:
-{ services.nix-daemon.enable = true;
+{ pkgs, config, ... }: 
 
+{ 
+  services.nix-daemon.enable = true;
   users = {
     users = {
       mudrii = {
@@ -86,7 +87,6 @@
       "ISD Go" = 1447072980;
       "Keynote" = 409183694;
       "Meeter" = 1510445899;
-      "NextDNS" = 1464122853;
       "Numbers" = 409203825;
       "Omnivore" = 1564031042;
       "Pages" = 409201541;
@@ -96,8 +96,9 @@
       "Telegram Lite" = 946399090;
       "UTM" = 1538878817;
       "Velja" = 1607635845;
-      "Xcode" = 497799835;
       "WeChat" = 836500024;
+      "Xcode" = 497799835;
+      # "NextDNS" = 1464122853;
       # "iMovie" = 408981434;
       };
     global = {

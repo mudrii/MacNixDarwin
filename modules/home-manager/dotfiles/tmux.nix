@@ -12,17 +12,16 @@
       shell = "${pkgs.fish}/bin/fish";
       plugins = with pkgs; [
         tmuxPlugins.better-mouse-mode
-        tmuxPlugins.resurrect
-        tmuxPlugins.yank
-        tmuxPlugins.nord
-        tmuxPlugins.resurrect
-        tmuxPlugins.open
-        tmuxPlugins.sidebar
         tmuxPlugins.continuum
+        tmuxPlugins.nord
+        tmuxPlugins.open
+        tmuxPlugins.resurrect
+        tmuxPlugins.sidebar
         tmuxPlugins.vim-tmux-navigator
+        tmuxPlugins.yank
       ];
       extraConfig = ''
-#        source ${pkgs.python310Packages.powerline}/share/tmux/powerline.conf
+#        source ${pkgs.python3Packages.powerline}/share/tmux/powerline.conf
 #        source ${pkgs.powerline}/share/tmux/powerline.conf
 
         # Lower delay

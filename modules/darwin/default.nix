@@ -156,6 +156,7 @@
       "vivaldi"
       "whatsapp"
       "wireshark"
+      "ykman"
       "yubico-authenticator"
       "yubico-yubikey-manager"
       "zoom"

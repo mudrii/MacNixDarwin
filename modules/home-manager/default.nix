@@ -59,7 +59,7 @@ in
       nixpkgs-fmt
       nodejs
       nushell
-      open-interpreter
+      # open-interpreter
       openai-whisper-cpp
       parallel
       poetry

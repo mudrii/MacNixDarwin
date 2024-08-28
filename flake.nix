@@ -29,7 +29,7 @@
         }
       ];
     };
-    darwinConfigurations.mudrii14 = darwin.lib.darwinSystem {
+    /* darwinConfigurations.mudrii14 = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
         ./modules/darwin
@@ -44,6 +44,6 @@
           };
         }
       ];
-    };
+    }; */
   };
 }

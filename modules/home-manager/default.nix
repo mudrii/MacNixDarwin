@@ -35,7 +35,7 @@ in
     packages = with pkgs; [
       # openai-whisper
       # open-webui
-      bun
+      # bun
       cloudflared
       curl
       duf
@@ -59,7 +59,6 @@ in
       nixpkgs-fmt
       nodejs
       nushell
-      # open-interpreter
       openai-whisper-cpp
       parallel
       poetry
@@ -89,6 +88,7 @@ in
             matplotlib
             numpy
             ollama
+            open-interpreter
             openai
             openai-whisper
             opencv4
